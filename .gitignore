@@ -1,0 +1,5 @@
+node_modules
+*.vsix
+out/
+package-lock.json
+src/mlsql-lang

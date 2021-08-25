@@ -1,0 +1,54 @@
+{
+    "name": "mlsql",
+    "displayName": "mlsql",
+    "description": "The Programming Language Designed For Big Data and AI",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.59.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "main": "./out/main.js",
+    "activationEvents": [
+        "onLanguage:mlsql"
+    ],
+    "scripts": {
+        "vscode:prepublish": "npm run esbuild-base -- --minify",
+        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+        "esbuild": "npm run esbuild-base -- --sourcemap",
+        "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+        "test-compile": "tsc -p ./"
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "mlsql",
+                "aliases": [
+                    "MLSQL",
+                    "mlsql"
+                ],
+                "extensions": [
+                    "mlsql"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "mlsql",
+                "scopeName": "main.mlsql",
+                "path": "./syntaxes/mlsql.tmLanguage.json"
+            }
+        ]
+    },
+    "dependencies": {
+        "vscode-languageclient": "7.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^16.7.1",
+        "@types/vscode": "^1.52.0",
+        "@vscode/test-electron": "^1.6.1",
+        "esbuild": "^0.12.22"
+    }
+}
