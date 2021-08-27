@@ -1,50 +1,31 @@
-import { runMain } from 'module';
-import * as path from 'path';
 import { workspace, ExtensionContext, commands, Uri } from 'vscode';
+import * as fs  from 'fs';
+import * as path from 'path';
 
-import {
-	LanguageClient,
-	LanguageClientOptions,
-	ServerOptions,
-	TransportKind
-} from 'vscode-languageclient/node';
-import { CodeManager } from './CodeManager';
+import { CodeManager } from './code-manager';
+import { LangServer } from './lang-server';
+import { UIProxy } from './ui-proxy';
+import * as extUtils from './extension-utils';
+import {uiProxy} from "./ui-proxy";
 
-export function activate(context: ExtensionContext) {
+export function activate(context: ExtensionContext) {    
     const codeManager = new CodeManager()
-    const {JAVA_HOME} = process.env
-    codeManager.println(`Using java from JAVA_HOME:${JAVA_HOME}`)
-    if(!JAVA_HOME) return
-    let executable: string = path.join(JAVA_HOME,"bin","java")
-    let BASE_DIR=path.join(__dirname,"../../src/mlsql-lang/mlsql-app_2.4-2.1.0-SNAPSHOT")
-    const args: string[] = ["-cp",
-    `${path.join(BASE_DIR,"main","*")}:${path.join(BASE_DIR,"libs","*")}:${path.join(BASE_DIR,"plugin","*")}:${path.join(BASE_DIR,"spark","*")}`]
-    const mainClass = "tech.mlsql.plugins.langserver.launchers.stdio.Launcher"
-    let serverOptions: ServerOptions = {
-        command: executable,
-        args: [...args, mainClass],
-        options: {}
-    }
-
-    let clientOptions: LanguageClientOptions = {        
-        documentSelector: [{ scheme: 'sql', language: 'mlsql' }]
-    }
-
-    let disposable = new LanguageClient('MLSQL', 'MLSQL Language Server', serverOptions, clientOptions).start();
-
-    
-	context.subscriptions.push(disposable)
-
+    const langServer = new LangServer(context)
+    langServer.create()    
+    extUtils.loadExtentionIfNeed("RandomFractalsInc.vscode-data-preview")
     const run = commands.registerCommand("mlsql.run",(fileUri:Uri)=>{
       let executeRun = async ()=>{
         let resp = await codeManager.runCode(fileUri)
-        codeManager.println(JSON.stringify(resp))
+        let jsonStr = JSON.stringify(resp)        
+        fs.writeFileSync(path.join(".",".result","t.json"),jsonStr)        
+        // commands.executeCommand("xmlTools.formatAsXml");
        }
        executeRun()
     })
 
-    context.subscriptions.push(run)
+    context.subscriptions.push(run)    
     context.subscriptions.push(codeManager)
+    context.subscriptions.push(langServer)    
 }
 
 export function deactivate(context:ExtensionContext) {

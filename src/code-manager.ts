@@ -1,18 +1,17 @@
 import * as vscode from "vscode";
 import * as HTTP from 'axios';
 import * as qs from 'qs'
+import {uiProxy} from "./ui-proxy";
+
 
 export class CodeManager implements vscode.Disposable {
-    private _outputChannel: vscode.OutputChannel;
     private _terminal: vscode.Terminal;
     private _isRunning: boolean;
     private _runFromExplorer: boolean;
-    private _document: vscode.TextDocument;
-    constructor() {
-        this._outputChannel = vscode.window.createOutputChannel("Code");
-        this._outputChannel.show();
-        this._terminal = null;
+    private _document: vscode.TextDocument;    
+    constructor() {                 
     }
+    
     public onDidCloseTerminal(): void {
         this._terminal = null;
     }
@@ -47,7 +46,7 @@ export class CodeManager implements vscode.Disposable {
             }))
             return response.data
         } catch (error) {
-            this.println(error)
+            uiProxy.println(error)
         }
         return "{}"
 
@@ -55,10 +54,6 @@ export class CodeManager implements vscode.Disposable {
 
     public dispose() {
 
-    }
-
-    public println(s: string) {
-        this._outputChannel.appendLine(s)
     }
 
     private checkIsRunFromExplorer(fileUri: vscode.Uri): boolean {
