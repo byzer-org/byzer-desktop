@@ -16,7 +16,7 @@ export class CodeManager implements vscode.Disposable {
         this._terminal = null;
     }
 
-    public async runCode(fileUri: vscode.Uri = null): Promise<string> {
+    public async runCode(fileUri: vscode.Uri = null): Promise<Object> {
         if (this._isRunning) {
             vscode.window.showInformationMessage("There is one MLSQL file is running.")
             return;
@@ -35,6 +35,7 @@ export class CodeManager implements vscode.Disposable {
         }
 
         let code = this._document.getText();
+        uiProxy.println(`execuge code: ${this._document.fileName}`)
 
         try {
             const response = await HTTP.default.post("http://127.0.0.1:9003/run/script", qs.stringify({
