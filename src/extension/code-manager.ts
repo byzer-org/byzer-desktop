@@ -50,7 +50,7 @@ export class CodeManager implements vscode.Disposable {
             }))
             return response.data as MLSQLExecuteResponse
         } catch (error) {
-            uiProxy.println(error)
+            uiProxy.println(error+"")
         }
         return {}
 

@@ -17,7 +17,7 @@ export class LangServer {
         uiProxy.println(`Using java from JAVA_HOME:${JAVA_HOME}`)
         if (!JAVA_HOME) return 
         let executable: string = path.join(JAVA_HOME, "bin", "java")
-        let BASE_DIR = path.join(__dirname, "../../src/mlsql-lang/mlsql-app_2.4-2.1.0-SNAPSHOT")
+        let BASE_DIR = path.join(__dirname, "./mlsql-lang/mlsql-app_2.4-2.1.0-SNAPSHOT")
         const args: string[] = ["-cp",
             `${path.join(BASE_DIR, "main", "*")}:${path.join(BASE_DIR, "libs", "*")}:${path.join(BASE_DIR, "plugin", "*")}:${path.join(BASE_DIR, "spark", "*")}`]
         const mainClass = "tech.mlsql.plugins.langserver.launchers.stdio.Launcher"
