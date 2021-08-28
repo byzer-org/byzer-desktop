@@ -4,7 +4,7 @@
         "target": "es6",
         "outDir": "out",
         "lib": [
-            "ES2019"
+            "ES2019","dom"
         ],
         "sourceMap": true,
         "rootDir": "."
@@ -12,5 +12,5 @@
     "exclude": [
         "node_modules",
         ".vscode-test"
-    ]
+    ]    
 }

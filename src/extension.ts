@@ -4,20 +4,25 @@ import { LangServer } from './lang-server';
 import * as extUtils from './extension-utils';
 import { codeManager } from './code-manager';
 import { executeAndRender } from './commands-action';
+import { MLSQLNotebookController, MLSQLNotebookSerializer } from './notebooke';
 
-export function activate(context: ExtensionContext) {            
+export function activate(context: ExtensionContext) {
     const langServer = new LangServer(context)
-    langServer.create()    
+    langServer.create()
     const dataPreviewExt = extUtils.loadExtentionIfNeed("RandomFractalsInc.vscode-data-preview")
-    const run = commands.registerCommand("mlsql.run",(fileUri:Uri)=>{
-        executeAndRender(!dataPreviewExt,fileUri)
+    const run = commands.registerCommand("mlsql.run", (fileUri: Uri) => {
+        executeAndRender(!dataPreviewExt, fileUri)
     })
 
-    context.subscriptions.push(run)    
+    context.subscriptions.push(run)
     context.subscriptions.push(codeManager)
-    context.subscriptions.push(langServer)    
+    context.subscriptions.push(langServer)
+    context.subscriptions.push(
+        workspace.registerNotebookSerializer('mlsql-notebook', new MLSQLNotebookSerializer())
+    )
+    context.subscriptions.push(new MLSQLNotebookController());
 }
 
-export function deactivate(context:ExtensionContext) {
+export function deactivate(context: ExtensionContext) {
 
 }

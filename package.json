@@ -39,6 +39,15 @@
                     "mlsql"
                 ],
                 "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "mlsql-notebook",
+                "aliases": [
+                    "MLSQL NoteBook"
+                  ],
+                "filenamePatterns": [
+                    "*.mlsqlnb"
+                ]
             }
         ],
         "grammars": [
@@ -46,11 +55,11 @@
                 "language": "mlsql",
                 "scopeName": "main.mlsql",
                 "path": "./syntaxes/mlsql.tmLanguage.json"
-            }
+            }            
         ],
         "notebooks": [
             {
-                "id":"mlsql-notebook",
+                "id": "mlsql-notebook",
                 "type": "mlsql-notebook",
                 "displayName": "MLSQL Notebook",
                 "selector": [
