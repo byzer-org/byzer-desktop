@@ -2,25 +2,27 @@ import * as vscode from "vscode";
 import * as HTTP from 'axios';
 import * as qs from 'qs'
 import {uiProxy} from "./ui-proxy";
+import { MLSQLExecuteResponse } from "../common/data";
 
 
 export class CodeManager implements vscode.Disposable {
     private static _instance: CodeManager;
-    private _terminal: vscode.Terminal;
-    private _isRunning: boolean;
-    private _runFromExplorer: boolean;
-    private _document: vscode.TextDocument;    
-    constructor() {                 
+    private _isRunning: boolean;    
+    private _runFromExplorer:boolean;
+    private _document: vscode.TextDocument | null;    
+    constructor() { 
+        this._isRunning = false 
+        this._runFromExplorer =false
+        this._document = null               
     }
     
-    public onDidCloseTerminal(): void {
-        this._terminal = null;
+    public onDidCloseTerminal(): void {        
     }
 
-    public async runCode(fileUri: vscode.Uri = null): Promise<Object> {
+    public async runCode(fileUri: vscode.Uri): Promise<MLSQLExecuteResponse|Object> {
         if (this._isRunning) {
             vscode.window.showInformationMessage("There is one MLSQL file is running.")
-            return;
+            return {};
         }
         this._runFromExplorer = this.checkIsRunFromExplorer(fileUri);
         if (this._runFromExplorer) {
@@ -31,7 +33,7 @@ export class CodeManager implements vscode.Disposable {
                 this._document = editor.document;
             } else {
                 vscode.window.showInformationMessage("No file found or selected.");
-                return;
+                return {};
             }
         }
 
@@ -46,11 +48,11 @@ export class CodeManager implements vscode.Disposable {
                 fetchType: "take",
                 jobName: this._document.uri.fsPath                
             }))
-            return response.data
+            return response.data as MLSQLExecuteResponse
         } catch (error) {
             uiProxy.println(error)
         }
-        return "{}"
+        return {}
 
     }
 
@@ -81,7 +83,7 @@ export class CodeManager implements vscode.Disposable {
             }
             return vscode.workspace.workspaceFolders[0].uri.fsPath;
         } else {
-            return undefined;
+            return "";
         }
     }
     public static get Instance() {

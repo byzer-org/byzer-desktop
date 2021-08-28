@@ -1,10 +1,7 @@
 import * as vscode from "vscode";
-import {
-    generateTable,
-    generateHTMLTable,
-    generateExcel,
-    parseDataToSchema
-} from 'json5-to-table'
+import { MLSQLExecuteResponse } from "../common/data"
+// @ts-ignore
+import { generateHTMLTable } from 'json5-to-table'
 import { uiProxy } from "./ui-proxy";
 //  // Get path to resource on disk
 //  const onDiskPath = vscode.Uri.file( 
@@ -15,7 +12,7 @@ import { uiProxy } from "./ui-proxy";
 // then put the cssURI to html page.
 export class SqlResultWebView {
     private static instance: vscode.WebviewPanel
-    public static show(data, title) {
+    public static show(data: MLSQLExecuteResponse, title: string) {
         if (SqlResultWebView.instance) {
             SqlResultWebView.instance.dispose()
         }
@@ -28,8 +25,8 @@ export class SqlResultWebView {
         uiProxy.println(SqlResultWebView.instance.webview.html)
     }
 
-    public static getWebviewContent(data): string {
-        const head = [].concat(
+    public static getWebviewContent(data: MLSQLExecuteResponse): string {
+        const head = [
             "<!DOCTYPE html>",
             "<html>",
             "<head>",
@@ -37,7 +34,7 @@ export class SqlResultWebView {
             "<style>table{border-collapse:collapse; }table,td,th{border:1px dotted #ccc; padding:5px;}th {background:#444} </style>",
             "</head>",
             "<body>",
-        ).join("\n");
+        ].join("\n");
 
         const body = SqlResultWebView.render(data);
 
@@ -49,12 +46,12 @@ export class SqlResultWebView {
         return head + body + tail;
     }
 
-    private static render(res: Object) {
-        const fields = res["schema"]["fields"] as Array<{ name: string }>
+    private static render(res: MLSQLExecuteResponse) {
+        const fields = res.schema.fields
         const schema = fields.map((item) => {
             return { "title": item.name, "path": item.name }
         })
-        return generateHTMLTable(res["data"], schema)
+        return generateHTMLTable(res.data, schema)
     }
 
 }

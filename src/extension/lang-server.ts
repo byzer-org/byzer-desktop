@@ -12,10 +12,10 @@ export class LangServer {
         this._context = context        
     }
 
-    public create(): LanguageClient {
+    public create(): LanguageClient | undefined {
         const { JAVA_HOME } = process.env
         uiProxy.println(`Using java from JAVA_HOME:${JAVA_HOME}`)
-        if (!JAVA_HOME) return
+        if (!JAVA_HOME) return 
         let executable: string = path.join(JAVA_HOME, "bin", "java")
         let BASE_DIR = path.join(__dirname, "../../src/mlsql-lang/mlsql-app_2.4-2.1.0-SNAPSHOT")
         const args: string[] = ["-cp",

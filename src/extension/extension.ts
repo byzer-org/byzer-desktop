@@ -4,7 +4,7 @@ import { LangServer } from './lang-server';
 import * as extUtils from './extension-utils';
 import { codeManager } from './code-manager';
 import { executeAndRender } from './commands-action';
-import { MLSQLNotebookController, MLSQLNotebookSerializer } from './notebooke';
+import { MLSQLNotebookController, MLSQLNotebookSerializer } from './notebook';
 
 export function activate(context: ExtensionContext) {
     const langServer = new LangServer(context)
@@ -23,6 +23,6 @@ export function activate(context: ExtensionContext) {
     context.subscriptions.push(new MLSQLNotebookController());
 }
 
-export function deactivate(context: ExtensionContext) {
+export function deactivate(_: ExtensionContext) {
 
 }

@@ -1,5 +1,6 @@
 import { TextDecoder, TextEncoder } from 'util';
 import * as vscode from 'vscode';
+import { MLSQLExecuteResponse } from '../common/data';
 import { codeManager } from './code-manager';
 import { SqlResultWebView } from './result-webview';
 
@@ -45,7 +46,7 @@ export class MLSQLNotebookController implements vscode.Disposable {
 
         execution.replaceOutput([
             new vscode.NotebookCellOutput([
-                vscode.NotebookCellOutputItem.text(SqlResultWebView.getWebviewContent(res),'text/html')
+                vscode.NotebookCellOutputItem.text(SqlResultWebView.getWebviewContent(res as MLSQLExecuteResponse),'text/html')
             ]),
             new vscode.NotebookCellOutput([
                 vscode.NotebookCellOutputItem.json(res)
