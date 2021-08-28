@@ -89,7 +89,8 @@
             }
         ]
     },
-    "dependencies": {                
+    "dependencies": {   
+        "-": "0.0.1",             
         "axios": "^0.21.1",
         "json5-to-table": "^0.1.5",
         "lodash": "^4.17.21",

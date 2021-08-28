@@ -105,7 +105,7 @@ const rendererConfig = {
 					{
 						loader: 'ts-loader',
 						options: {
-							configFile: path.resolve(__dirname, 'src/custom-renderer/tsconfig.json'),
+							configFile: path.resolve(__dirname, 'src/mlsql-notebook-renderer/tsconfig.json'),
 							projectReferences: true,
 							compilerOptions: {
 								module: 'esnext',
