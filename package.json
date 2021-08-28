@@ -12,7 +12,8 @@
     "main": "./out/src/extension",
     "activationEvents": [
         "onLanguage:mlsql",
-        "onCommand:mlsql.run"
+        "onCommand:mlsql.run",
+        "onNotebook:mlsql-notebook-provider"
     ],
     "publisher": "allwefantasy",
     "scripts": {
@@ -46,14 +47,28 @@
                 "scopeName": "main.mlsql",
                 "path": "./syntaxes/mlsql.tmLanguage.json"
             }
+        ],
+        "notebooks": [
+            {
+                "id":"mlsql-notebook",
+                "type": "mlsql-notebook",
+                "displayName": "MLSQL Notebook",
+                "selector": [
+                    {
+                        "filenamePattern": "*.mlsqlnb"
+                    }
+                ]
+            }
         ]
     },
     "extensionDependencies": [
         "RandomFractalsInc.vscode-data-preview"
     ],
     "dependencies": {
+        "@types/vscode-notebook-renderer": "^1.60.0",
         "applicationinsights": "^0.19.0",
         "axios": "^0.21.1",
+        "json5-to-table": "^0.1.5",
         "qs": "^6.10.1",
         "uuid": "^8.3.2",
         "vscode-languageclient": "7.0.0"

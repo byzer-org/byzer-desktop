@@ -1,26 +1,26 @@
 import * as vscode from "vscode";
+import { activate } from "./extension";
 import {uiProxy} from "./ui-proxy";
 
-export function loadExtentionIfNeed(name: string) {
+export function loadExtentionIfNeed(name: string): vscode.Extension<any> | undefined {
     /**
      * vscode.extensions.all.map(x => x.id). 
      * They are of the form <extension publisher>.<extension name>
      */
     var ext = vscode.extensions.getExtension(name);
+    if (!ext) return ext
     // is the ext loaded and ready?
     if (ext.isActive == false) {
         ext.activate().then(
             function () {
-                uiProxy.println("Extension activated");
-                // comment next line out for release
-                dumpAllCommand();
-                //vscode.commands.executeCommand("xmlTools.formatAsXml");
+                uiProxy.println(`Extension ${name} activated`);                
             },
             function () {
-                uiProxy.println("Extension activation failed");
+                uiProxy.println(`Extension ${name} activation failed`);
             }
         );
-    } 
+    }    
+    return ext
 }
 
 

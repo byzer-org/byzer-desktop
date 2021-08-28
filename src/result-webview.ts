@@ -1,12 +1,31 @@
 import * as vscode from "vscode";
-
+import {
+    generateTable,
+    generateHTMLTable,
+    generateExcel,
+    parseDataToSchema
+} from 'json5-to-table'
+import { uiProxy } from "./ui-proxy";
+//  // Get path to resource on disk
+//  const onDiskPath = vscode.Uri.file( 
+//     path.join(context.extensionPath, 'css', 'style.css')
+//  );
+//  // And get the special URI to use with the webview
+//  const cssURI = panel.webview.asWebviewUri(onDiskPath);
+// then put the cssURI to html page.
 export class SqlResultWebView {
+    private static instance: vscode.WebviewPanel
     public static show(data, title) {
-        const panel = vscode.window.createWebviewPanel("MLSQL", title, vscode.ViewColumn.Two, {
+        if (SqlResultWebView.instance) {
+            SqlResultWebView.instance.dispose()
+        }
+        SqlResultWebView.instance = vscode.window.createWebviewPanel("MLSQL", title, vscode.ViewColumn.Two, {
             retainContextWhenHidden: true,
+            enableScripts: true
         });
 
-        panel.webview.html = SqlResultWebView.getWebviewContent(data);
+        SqlResultWebView.instance.webview.html = SqlResultWebView.getWebviewContent(data);
+        uiProxy.println(SqlResultWebView.instance.webview.html)
     }
 
     public static getWebviewContent(data): string {
@@ -30,30 +49,12 @@ export class SqlResultWebView {
         return head + body + tail;
     }
 
-    private static render(rows) {
-        if (rows.length === 0) {
-            return "No data";
-        }
-
-        let head = "";
-        for (const field in rows[0]) {
-            if (rows[0].hasOwnProperty(field)) {
-                head += "<th>" + field + "</th>";
-            }
-        }
-        let body = "<table><tr>" + head + "</tr>";
-        rows.forEach((row) => {
-            body += "<tr>";
-            for (const field in row) {
-                if (row.hasOwnProperty(field)) {
-                    body += "<td>" + row[field] + "</td>";
-                }
-            }
-
-            body += "</tr>";
-        });
-
-        return body + "</table>";
+    private static render(res: Object) {
+        const fields = res["schema"]["fields"] as Array<{ name: string }>
+        const schema = fields.map((item) => {
+            return { "title": item.name, "path": item.name }
+        })
+        return generateHTMLTable(res["data"], schema)
     }
 
 }

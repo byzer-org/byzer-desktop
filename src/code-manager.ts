@@ -5,6 +5,7 @@ import {uiProxy} from "./ui-proxy";
 
 
 export class CodeManager implements vscode.Disposable {
+    private static _instance: CodeManager;
     private _terminal: vscode.Terminal;
     private _isRunning: boolean;
     private _runFromExplorer: boolean;
@@ -83,4 +84,9 @@ export class CodeManager implements vscode.Disposable {
             return undefined;
         }
     }
+    public static get Instance() {
+        return this._instance || (this._instance = new this());
+      }
 }
+
+export const codeManager = CodeManager.Instance;
