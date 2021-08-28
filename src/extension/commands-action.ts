@@ -9,5 +9,7 @@ export const executeAndRender = async (_: boolean, fileUri: vscode.Uri) => {
     // const targetPath = createJsonFile(vscode.workspace.workspaceFolders?[0]?.uri.fsPath,data)
     // uiProxy.println(targetPath)
     // vscode.commands.executeCommand("data.preview.on.side",vscode.Uri.file(targetPath));
-    SqlResultWebView.show(resp as MLSQLExecuteResponse, "Data");
+    if (resp){
+        SqlResultWebView.show(resp as MLSQLExecuteResponse, "Data");
+    }    
 }

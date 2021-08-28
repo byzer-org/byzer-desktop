@@ -1,28 +1,45 @@
 import * as vscode from "vscode";
 import * as HTTP from 'axios';
 import * as qs from 'qs'
-import {uiProxy} from "./ui-proxy";
+import { uiProxy } from "./ui-proxy";
 import { MLSQLExecuteResponse } from "../common/data";
 
 
 export class CodeManager implements vscode.Disposable {
     private static _instance: CodeManager;
-    private _isRunning: boolean;    
-    private _runFromExplorer:boolean;
-    private _document: vscode.TextDocument | null;    
-    constructor() { 
-        this._isRunning = false 
-        this._runFromExplorer =false
-        this._document = null               
-    }
-    
-    public onDidCloseTerminal(): void {        
+    private _isRunning: boolean;
+    private _runFromExplorer: boolean;
+    private _document: vscode.TextDocument | null;
+    constructor() {
+        this._isRunning = false
+        this._runFromExplorer = false
+        this._document = null
     }
 
-    public async runCode(fileUri: vscode.Uri): Promise<MLSQLExecuteResponse|Object> {
+    public onDidCloseTerminal(): void {
+    }
+
+    public async runRawCode(rawCode: string,jobName: string): Promise<MLSQLExecuteResponse | string> {            
+        try {
+            return HTTP.default.post("http://127.0.0.1:9003/run/script", qs.stringify({
+                sql: rawCode,
+                skipAuth: false,
+                includeSchema: true,
+                fetchType: "take",
+                jobName: jobName
+            })).then((response) => response.data as MLSQLExecuteResponse)
+                .catch((error) => error.response.data)
+        } catch (error) {
+            uiProxy.println(error + "")
+        }
+        return ""
+
+    }
+
+    public async runCode(fileUri: vscode.Uri): Promise<MLSQLExecuteResponse | string> {
         if (this._isRunning) {
             vscode.window.showInformationMessage("There is one MLSQL file is running.")
-            return {};
+            return "";
         }
         this._runFromExplorer = this.checkIsRunFromExplorer(fileUri);
         if (this._runFromExplorer) {
@@ -33,26 +50,13 @@ export class CodeManager implements vscode.Disposable {
                 this._document = editor.document;
             } else {
                 vscode.window.showInformationMessage("No file found or selected.");
-                return {};
+                return "";
             }
         }
 
         let code = this._document.getText();
         uiProxy.println(`execuge code: ${this._document.fileName}`)
-
-        try {
-            const response = await HTTP.default.post("http://127.0.0.1:9003/run/script", qs.stringify({
-                sql: code,
-                skipAuth: false,
-                includeSchema: true,
-                fetchType: "take",
-                jobName: this._document.uri.fsPath                
-            }))
-            return response.data as MLSQLExecuteResponse
-        } catch (error) {
-            uiProxy.println(error+"")
-        }
-        return {}
+        return this.runRawCode(code,fileUri.fsPath)
 
     }
 
@@ -88,7 +92,7 @@ export class CodeManager implements vscode.Disposable {
     }
     public static get Instance() {
         return this._instance || (this._instance = new this());
-      }
+    }
 }
 
 export const codeManager = CodeManager.Instance;
