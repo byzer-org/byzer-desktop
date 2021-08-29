@@ -35,11 +35,21 @@ MLSQL Lang is A Visual Studio Code extension that allows you to run MLSQL code i
 
 ![](docs/images/notebook.png)
 
-## build-plugins
+## Build-in Plugins
 
 Excel/Shell is build-in support in this extention. You can load excel file like this:
 
 ![](docs/images/excel.png)
+
+## Install Third-party Plugin
+
+The plugins repo: [mlsql-plugins](https://github.com/allwefantasy/mlsql-plugins)
+
+You can install them like this:
+
+![](docs/images/plugin-install.png)
+
+
 
 ## Know Issues
 
