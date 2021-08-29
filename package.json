@@ -12,6 +12,7 @@
     "main": "./dist/extension-node.js",
     "activationEvents": [
         "onLanguage:mlsql",
+        "onLanguage:mlsqlnb",
         "onCommand:mlsql.run",
         "onNotebook:mlsql-notebook-provider"
     ],
