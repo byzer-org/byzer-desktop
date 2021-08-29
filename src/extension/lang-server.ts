@@ -15,7 +15,10 @@ export class LangServer {
     public create(): LanguageClient | undefined {
         const { JAVA_HOME } = process.env
         uiProxy.println(`Using java from JAVA_HOME:${JAVA_HOME}`)
-        if (!JAVA_HOME) return 
+        if (!JAVA_HOME) {
+            uiProxy.println("Java >= 1.8 preinstalled is required. Please search JDK in vscode market.")
+            return
+        } 
         let executable: string = path.join(JAVA_HOME, "bin", "java")
         let BASE_DIR = path.join(__dirname, "./mlsql-lang/mlsql-app_2.4-2.1.0-SNAPSHOT")
         const args: string[] = ["-cp",

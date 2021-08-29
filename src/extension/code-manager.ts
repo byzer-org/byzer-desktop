@@ -19,14 +19,15 @@ export class CodeManager implements vscode.Disposable {
     public onDidCloseTerminal(): void {
     }
 
-    public async runRawCode(rawCode: string, jobName: string): Promise<MLSQLExecuteResponse | string> {        
+    public async runRawCode(rawCode: string, jobName: string): Promise<MLSQLExecuteResponse | string> {
         try {
             return HTTP.default.post("http://127.0.0.1:9003/run/script", qs.stringify({
                 sql: rawCode,
                 skipAuth: false,
                 includeSchema: true,
                 fetchType: "take",
-                jobName: jobName
+                jobName: jobName,
+                owner: "admin"
             })).then((response) => response.data as MLSQLExecuteResponse)
                 .catch((error) => error.response.data)
         } catch (error) {
