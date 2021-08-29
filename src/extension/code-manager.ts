@@ -3,6 +3,7 @@ import * as HTTP from 'axios';
 import * as qs from 'qs'
 import { uiProxy } from "./ui-proxy";
 import { MLSQLExecuteResponse } from "../common/data";
+import { readConfig } from "./file-utils";
 
 
 export class CodeManager implements vscode.Disposable {
@@ -10,10 +11,12 @@ export class CodeManager implements vscode.Disposable {
     private _isRunning: boolean;
     private _runFromExplorer: boolean;
     private _document: vscode.TextDocument | null;
+    private _config: { [key: string]: string; }
     constructor() {
         this._isRunning = false
         this._runFromExplorer = false
         this._document = null
+        this._config = readConfig()
     }
 
     public onDidCloseTerminal(): void {
@@ -21,13 +24,23 @@ export class CodeManager implements vscode.Disposable {
 
     public async runRawCode(rawCode: string, jobName: string): Promise<MLSQLExecuteResponse | string> {
         try {
-            return HTTP.default.post("http://127.0.0.1:9003/run/script", qs.stringify({
+            let engineUrl = this._config["engine_url"] || "http://127.0.0.1:9003"
+            if (engineUrl.endsWith("/")) {
+                engineUrl = engineUrl.slice(0, engineUrl.length - 1)
+            }
+            let owner = this._config["owner"] || "admin"
+            let access_token = this._config["access_token"] || ""
+            let extraOpt:{[key:string]:string} = {}
+            if (access_token) {
+                extraOpt = { access_token: access_token }
+            }
+            return HTTP.default.post(engineUrl + "/run/script", qs.stringify({
                 sql: rawCode,
                 skipAuth: false,
                 includeSchema: true,
                 fetchType: "take",
                 jobName: jobName,
-                owner: "admin"
+                owner: owner, ...extraOpt
             })).then((response) => response.data as MLSQLExecuteResponse)
                 .catch((error) => error.response.data)
         } catch (error) {
@@ -57,7 +70,7 @@ export class CodeManager implements vscode.Disposable {
 
         let code = this._document.getText();
         uiProxy.println(`execuge code: ${this._document.fileName}`)
-        return this.runRawCode(code,this._document.fileName)
+        return this.runRawCode(code, this._document.fileName)
 
     }
 

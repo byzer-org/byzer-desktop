@@ -35,6 +35,20 @@ MLSQL Lang is A Visual Studio Code extension that allows you to run MLSQL code i
 
 ![](docs/images/notebook.png)
 
+## Congiguration
+
+You can configure MLSQL Lang server with file `.mlsql.config`  in your project (root path).
+
+For example:
+
+```
+engine_url=http://127.0.0.1:9003
+owner=admin
+memory=2048m
+access_token=123
+```
+
+
 ## Build-in Plugins
 
 Excel/Shell is build-in support in this extention. You can load excel file like this:
