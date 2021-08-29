@@ -57,7 +57,7 @@ export class CodeManager implements vscode.Disposable {
 
         let code = this._document.getText();
         uiProxy.println(`execuge code: ${this._document.fileName}`)
-        return this.runRawCode(code, fileUri.fsPath)
+        return this.runRawCode(code,this._document.fileName)
 
     }
 
