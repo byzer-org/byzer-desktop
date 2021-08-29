@@ -8,11 +8,17 @@ MLSQL Lang is A Visual Studio Code extension that allows you to run MLSQL code i
 
 ## Requirements
 
-JDK 1.8+ is required in your system.
+1. JDK 1.8+ is required in your system.
+2. MLSQL Lang is only tested in MacOS/Linux though this extension works in Windows.
+
 
 ## Usage
 
-1. Search `MLSQL` in Market, install it.
+1. Download extension from `http://download.mlsql.tech/mlsql-0.0.1.vsix` 
+   
+   * run command `code --install-extension mlsql-0.0.1.vsix`
+   * Or 
+
 2. Create a directory, then open it with Visual Studio Code.
 3. File extensions `.mlsql` or `.mlsqlnb` are supported.
 4. Once you open a mlsql file, the extension will be activated.
