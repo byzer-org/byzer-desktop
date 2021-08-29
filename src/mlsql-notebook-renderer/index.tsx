@@ -7,4 +7,3 @@ export const activate: ActivationFunction = (_context) => ({
 		render(<p>Error!</p>, element);
 	}
 });
-

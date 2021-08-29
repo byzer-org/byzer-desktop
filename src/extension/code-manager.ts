@@ -19,7 +19,7 @@ export class CodeManager implements vscode.Disposable {
     public onDidCloseTerminal(): void {
     }
 
-    public async runRawCode(rawCode: string,jobName: string): Promise<MLSQLExecuteResponse | string> {            
+    public async runRawCode(rawCode: string, jobName: string): Promise<MLSQLExecuteResponse | string> {        
         try {
             return HTTP.default.post("http://127.0.0.1:9003/run/script", qs.stringify({
                 sql: rawCode,
@@ -56,7 +56,7 @@ export class CodeManager implements vscode.Disposable {
 
         let code = this._document.getText();
         uiProxy.println(`execuge code: ${this._document.fileName}`)
-        return this.runRawCode(code,fileUri.fsPath)
+        return this.runRawCode(code, fileUri.fsPath)
 
     }
 

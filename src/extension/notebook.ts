@@ -5,6 +5,7 @@ import { codeManager } from './code-manager';
 import { SqlResultWebView } from './result-webview';
 import * as uuid from 'uuid';
 import { uiProxy } from './ui-proxy';
+import { pythonToMLSQL } from '../common/hint-manager'
 
 interface RawCellOutput {
     mime: string;
@@ -48,7 +49,7 @@ export class MLSQLNotebookController implements vscode.Disposable {
         for (let key of this.runningCells.keys()) {
             let msg = ""
             try {
-                const res = await codeManager.runRawCode(`!kill "${key.jobName}";`, uuid.v4())                
+                const res = await codeManager.runRawCode(`!kill "${key.jobName}";`, uuid.v4())
                 if (typeof (res) === "string") {
                     msg = res
                 } else {
@@ -66,7 +67,7 @@ export class MLSQLNotebookController implements vscode.Disposable {
         cells: vscode.NotebookCell[],
         _notebook: vscode.NotebookDocument,
         _controller: vscode.NotebookController
-    ): void {        
+    ): void {
         for (let cell of cells) {
             this._doExecution(cell);
         }
@@ -77,14 +78,14 @@ export class MLSQLNotebookController implements vscode.Disposable {
         execution.executionOrder = ++this._executionOrder;
         execution.start(Date.now()); // Keep track of elapsed time to execute cell.        
         const jobName = uuid.v4()
-
         const runningKey = {
             cell: cell,
             jobName: jobName
         }
+        const code = pythonToMLSQL(cell)
         this.runningCells.set(runningKey, true)
         try {
-            const res = await codeManager.runRawCode(cell.document.getText(), jobName)
+            const res = await codeManager.runRawCode(code, jobName)
 
             if (typeof (res) === "string") {
                 execution.replaceOutput([
@@ -129,7 +130,7 @@ export class MLSQLNotebookSerializer implements vscode.NotebookSerializer {
             let result: vscode.NotebookCellOutputItem[] = [];
 
             for (let output of raw.outputs) {
-                let data = new TextEncoder().encode(JSON.stringify(output.value));
+                let data = new TextEncoder().encode(output.value);
                 result.push(new vscode.NotebookCellOutputItem(data, output.mime));
             }
 
@@ -163,13 +164,7 @@ export class MLSQLNotebookSerializer implements vscode.NotebookSerializer {
                     } catch {
 
                     }
-
-                    try {
-                        let outputData = JSON.parse(outputContents);
-                        result.push({ mime: item.mime, value: outputData });
-                    } catch {
-                        result.push({ mime: item.mime, value: outputContents });
-                    }
+                    result.push({ mime: item.mime, value: outputContents });
                 }
             }
             return result;
