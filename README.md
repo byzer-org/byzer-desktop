@@ -17,7 +17,7 @@ MLSQL Lang is A Visual Studio Code extension that allows you to run MLSQL code i
 1. Download extension from `http://download.mlsql.tech/mlsql-0.0.1.vsix` 
    
    * run command `code --install-extension mlsql-0.0.1.vsix`
-   * Or 
+   * Or Just open `mlsql-0.0.1.vsix` in vscode.
 
 2. Create a directory, then open it with Visual Studio Code.
 3. File extensions `.mlsql` or `.mlsqlnb` are supported.
