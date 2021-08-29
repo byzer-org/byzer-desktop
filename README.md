@@ -53,11 +53,11 @@ You can install them like this:
 
 ## Know Issues
 
-If you reopen the project, if notebook is open before the mlsql-lang is activated,then 
-the following error will happen.
+If you reopen the project, when notebook is open before the mlsql-lang is activated,then 
+the following error will happen:
 
 ![](docs/images/error.png)
 
-Just reopen the notebook(.mlsqlnb) and everything goes Ok.
+Just close/open the notebook(.mlsqlnb) and everything goes Ok.
 
 
