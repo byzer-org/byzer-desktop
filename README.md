@@ -29,6 +29,12 @@ JDK 1.8+ is required in your system.
 
 ![](docs/images/notebook.png)
 
+## build-plugins
+
+Excel/Shell is build-in support in this extention. You can load excel file like this:
+
+![](docs/images/excel.png)
+
 ## Know Issues
 
 If you reopen the project, if notebook is open before the mlsql-lang is activated,then 
