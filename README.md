@@ -35,7 +35,7 @@ MLSQL Lang is A Visual Studio Code extension that allows you to run MLSQL code i
 
 ![](docs/images/notebook.png)
 
-## Congiguration
+## Congiguration (since 0.0.2)
 
 You can configure MLSQL Lang server with file `.mlsql.config`  in your project (root path).
 
