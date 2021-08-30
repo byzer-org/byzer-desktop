@@ -21,8 +21,7 @@ export class SqlResultWebView {
             enableScripts: true
         });
 
-        SqlResultWebView.instance.webview.html = SqlResultWebView.getWebviewContent(data);
-        uiProxy.println(SqlResultWebView.instance.webview.html)
+        SqlResultWebView.instance.webview.html = SqlResultWebView.getWebviewContent(data);        
     }
 
     public static getWebviewContent(data: MLSQLExecuteResponse): string {

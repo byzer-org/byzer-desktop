@@ -4,6 +4,7 @@ import { LangServer } from './lang-server';
 import { codeManager } from './code-manager';
 import { executeAndRender } from './commands-action';
 import { MLSQLNotebookController, MLSQLNotebookSerializer } from './notebook';
+import { uiProxy } from './ui-proxy';
 
 let client: LanguageClient | undefined;
 
@@ -24,7 +25,7 @@ export function activate(context: ExtensionContext) {
     context.subscriptions.push(new MLSQLNotebookController());
 }
 
-export function deactivate(_: ExtensionContext) : Thenable<void> | undefined  {
+export function deactivate(_: ExtensionContext) : Thenable<void> | undefined  {    
     if (!client) {
         return undefined;
     }
