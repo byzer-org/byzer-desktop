@@ -83,11 +83,22 @@ You can install them like this:
 
 ## Know Issues
 
+### .mlsqlnb have no plugin for it
+
 If you reopen the project, when notebook is open before the mlsql-lang is activated,then 
 the following error will happen:
 
 ![](docs/images/error.png)
 
 Just close/open the notebook(.mlsqlnb) and everything goes Ok.
+
+### mlsql lang server fails to quit when your workspace closed
+
+Sometimes the lang server will not quit properly when you close your workspace.
+Try using flowing command to find the pid and kill it.
+
+```
+ps -ef |grep 'tech.mlsql.plugins.langserver.launchers.stdio.Launcher'
+```
 
 
