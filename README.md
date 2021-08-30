@@ -21,7 +21,7 @@ Download extension from `http://download.mlsql.tech/mlsql-0.0.2.vsix`
 
    
    * run command `code --install-extension mlsql-0.0.2.vsix`
-   * Or Just open `mlsql-0.0.1.vsix` in vscode.
+   * Or Just open `mlsql-0.0.2.vsix` in vscode.
 
 
 ### Install From Market
