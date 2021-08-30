@@ -24,23 +24,26 @@ export class CodeManager implements vscode.Disposable {
 
     public async runRawCode(rawCode: string, jobName: string): Promise<MLSQLExecuteResponse | string> {
         try {
-            let engineUrl = this._config["engine_url"] || "http://127.0.0.1:9003"
+            let engineUrl = this._config["engine.url"] || "http://127.0.0.1:9003"
             if (engineUrl.endsWith("/")) {
                 engineUrl = engineUrl.slice(0, engineUrl.length - 1)
             }
-            let owner = this._config["owner"] || "admin"
-            let access_token = this._config["access_token"] || ""
-            let extraOpt:{[key:string]:string} = {}
-            if (access_token) {
-                extraOpt = { access_token: access_token }
+
+            let extraOpt: { [key: string]: string } = {}
+
+            for (let key in this._config) {
+                if (key.startsWith("user.")) {
+                    extraOpt[key.split("\\.")[1]] = this._config[key]
+                }
             }
+
             return HTTP.default.post(engineUrl + "/run/script", qs.stringify({
                 sql: rawCode,
                 skipAuth: false,
                 includeSchema: true,
                 fetchType: "take",
                 jobName: jobName,
-                owner: owner, ...extraOpt
+                owner: "admin", ...extraOpt
             })).then((response) => response.data as MLSQLExecuteResponse)
                 .catch((error) => error.response.data)
         } catch (error) {
