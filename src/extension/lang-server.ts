@@ -74,9 +74,10 @@ export class LangServer {
         let clientOptions: LanguageClientOptions = {
             documentSelector: [{ scheme: 'sql', language: 'mlsql' }]
         }
-
-        let client = new LanguageClient('MLSQL', 'MLSQL Language Server', serverOptions, clientOptions).start();
-        this._context.subscriptions.push(client)
+        const client = new LanguageClient('MLSQL', 'MLSQL Language Server', serverOptions, clientOptions)
+        let temp = client.start();
+        this._context.subscriptions.push(temp)
+        return client
     }
 
     public dispose() {
