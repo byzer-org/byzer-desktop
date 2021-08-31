@@ -2,14 +2,24 @@
 
 👉👉👉 JDK 1.8+ is required in your system.
 
-# MLSQL Lang
+# mlsql-Lang
 
-MLSQL Lang is A Visual Studio Code extension that allows you to run MLSQL code in both  Script/Notebook  interface.
+mlsql-lang is A Visual Studio Code extension that allows you to run MLSQL code in both  Script/Notebook  interface.
+
+### Current Version
+
+v0.0.2
+
+### v0.0.3 TODO
+
+* ✅ mlsql-lang highlight based on textmate
+*    mlsql-lang code autocomplete
+
 
 ## Requirements
 
 1. JDK 1.8+ is required in your system.
-2. MLSQL Lang is only tested in MacOS/Linux though this extension works in Windows.
+2. mlsql-lang is only tested in MacOS/Linux though this extension works in Windows.
 
 ## Installation
 
@@ -100,5 +110,4 @@ Try using flowing command to find the pid and kill it.
 ```
 ps -ef |grep 'tech.mlsql.plugins.langserver.launchers.stdio.Launcher'
 ```
-
 
