@@ -4,3 +4,4 @@ out/
 package-lock.json
 src/mlsql-lang
 dist/
+dev.sh
