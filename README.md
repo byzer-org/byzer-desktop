@@ -32,11 +32,11 @@ TODO
 
 > this extension contains mlsql-lang already.
 
-Download extension from `http://download.mlsql.tech/mlsql-0.0.2.vsix` 
+Download extension from `http://download.mlsql.tech/mlsql-0.0.3.vsix` 
 
    
-   * run command `code --install-extension mlsql-0.0.2.vsix`
-   * Or Just open `mlsql-0.0.2.vsix` in vscode.
+   * run command `code --install-extension mlsql-0.0.3.vsix`
+   * Or Just open `mlsql-0.0.3.vsix` in vscode.
 
 
 ### Install From Market
