@@ -1,6 +1,9 @@
 {
 	"references": [
 		{
+			"path": "./src/common-webview"
+		},
+		{
 			"path": "./src/mlsql-notebook-renderer"
 		},
 		{

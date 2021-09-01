@@ -13,7 +13,7 @@ export function activate(context: ExtensionContext) {
     client = langServer.create()
     // const dataPreviewExt = extUtils.loadExtentionIfNeed("RandomFractalsInc.vscode-data-preview")
     const run = commands.registerCommand("mlsql.run", (fileUri: Uri) => {
-        executeAndRender(false, fileUri)
+        executeAndRender(context, fileUri)
     })
 
     context.subscriptions.push(run)

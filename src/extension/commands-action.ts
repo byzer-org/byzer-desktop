@@ -1,9 +1,9 @@
 import * as vscode from 'vscode';
 import { codeManager } from './code-manager';
-import { SqlResultWebView } from './result-webview';
 import { MLSQLExecuteResponse } from '../common/data';
+import { ViewLoader } from '../common/view-loader';
 import { uiProxy } from './ui-proxy';
-export const executeAndRender = async (_: boolean, fileUri: vscode.Uri) => {
+export const executeAndRender = async (context: vscode.ExtensionContext, fileUri: vscode.Uri) => {
     let resp = await codeManager.runCode(fileUri)
     // disable dataPreviewExt            
     // const data = (resp as MLSQLExecuteResponse).data        
@@ -13,7 +13,10 @@ export const executeAndRender = async (_: boolean, fileUri: vscode.Uri) => {
     if (typeof resp === "string") {
         uiProxy.println(resp)
     } else {
-        SqlResultWebView.show(resp as MLSQLExecuteResponse, "Data");
+        const viewLoader = new ViewLoader(context,"JsonToTable" ,"data", "table")        
+        const data = resp as MLSQLExecuteResponse 
+        viewLoader.postMessageToWebview(data)
+        viewLoader.showWebview();
     }
 
 }

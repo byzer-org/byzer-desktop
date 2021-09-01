@@ -92,7 +92,7 @@ const webConfig = {
 };
 
 const rendererConfig = {
-	...config,	
+	...config,
 	entry: './src/mlsql-notebook-renderer/index.tsx',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
@@ -136,4 +136,49 @@ const rendererConfig = {
 	}
 };
 
-module.exports = [nodeConfig, webConfig, rendererConfig];
+const webviewConfig = {
+	...config,
+	entry: './src/common-webview/views.tsx',
+	output: {
+		path: path.resolve(__dirname, 'dist'),
+		filename: 'views.js',
+		libraryTarget: 'module',
+	},
+	devtool: "source-map",
+	resolve: {
+		extensions: [".ts", ".tsx", ".js", ".jsx", '.css']
+	},
+	experiments: {
+		outputModule: true,
+	},
+	module: {
+		rules: [
+			{
+				test: /\.tsx?$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'ts-loader',
+						options: {
+							configFile: path.resolve(__dirname, 'src/common-webview/tsconfig.json'),
+							projectReferences: true,
+							compilerOptions: {
+								module: 'ES2019',
+							},
+						},
+					},
+				],
+			},
+			{
+				test: /\.css$/i,
+				use: ['style-loader', 'css-loader'],
+			},
+			{
+				test: /\.svg$/,
+				loader: 'svg-inline-loader',
+			},
+		],
+	}
+};
+
+module.exports = [nodeConfig, webConfig, rendererConfig, webviewConfig];
