@@ -72,7 +72,7 @@ export class LangServer {
         }
 
         let clientOptions: LanguageClientOptions = {
-            documentSelector: [{ scheme: 'sql', language: 'mlsql' }]
+            documentSelector: [{ scheme: 'file', language: 'mlsql' },{ scheme: 'vscode-notebook-cell', language: 'mlsql' }]
         }
         const client = new LanguageClient('MLSQL', 'MLSQL Language Server', serverOptions, clientOptions)
         let temp = client.start();

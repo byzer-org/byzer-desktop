@@ -4,7 +4,6 @@ import { LangServer } from './lang-server';
 import { codeManager } from './code-manager';
 import { executeAndRender } from './commands-action';
 import { MLSQLNotebookController, MLSQLNotebookSerializer } from './notebook';
-import { uiProxy } from './ui-proxy';
 
 let client: LanguageClient | undefined;
 

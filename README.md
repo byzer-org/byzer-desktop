@@ -8,13 +8,17 @@ mlsql-lang is A Visual Studio Code extension that allows you to run MLSQL code i
 
 ### Current Version
 
-v0.0.2
+v0.0.3
 
-### v0.0.3 TODO
+### v0.0.3 
 
 * ✅ mlsql-lang highlight based on textmate
 * ✅ Better table
-*    mlsql-lang code autocomplete
+* ✅ mlsql-lang code autocomplete
+
+### v0.0.4 
+
+TODO
 
 
 ## Requirements
