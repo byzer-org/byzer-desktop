@@ -33,14 +33,14 @@ const config = {
 			// eslint-disable-next-line @typescript-eslint/naming-convention
 			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
 		}),
-		new CopyWebpackPlugin({
-			patterns: [
-				{
-					from: path.join(__dirname, 'src/mlsql-lang'),
-					to: path.join(__dirname, 'dist/mlsql-lang')
-				}
-			]
-		})
+		// new CopyWebpackPlugin({
+		// 	patterns: [
+		// 		{
+		// 			from: path.join(__dirname, 'src/mlsql-lang'),
+		// 			to: path.join(__dirname, 'dist/mlsql-lang')
+		// 		}
+		// 	]
+		// })
 	],
 	module: {
 		rules: [
