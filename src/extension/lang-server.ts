@@ -60,7 +60,10 @@ export class LangServer {
         if(xmx){
             args.unshift(xmx)
         }    
-                
+        
+        // const serverDebug = ["-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044","-Xdebug"]
+        // serverDebug.forEach(item=>args.unshift(item))
+        
         const mainClass = "tech.mlsql.plugins.langserver.launchers.stdio.Launcher"
 
         uiProxy.println("Start MLSQL lang server: " + [...args, mainClass].join(" "))
