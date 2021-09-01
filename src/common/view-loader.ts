@@ -73,8 +73,7 @@ export class ViewLoader {
     render() {
         const bundleScriptPath = this.panel.webview.asWebviewUri(
             vscode.Uri.file(path.join(this.context.extensionPath,"dist", 'views.js'))
-        );
-        const viewName = this.viewName
+        );        
 
         return `
       <!DOCTYPE html>

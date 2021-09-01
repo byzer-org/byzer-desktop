@@ -8,7 +8,7 @@ export const App = () => {
         data: []
     });
     const handleMessagesFromExtension = useCallback(
-        (event: MessageEvent<any>) => {            
+        (event: MessageEvent<any>) => {
             setMessagesFromExtension(event.data);
         },
         [messagesFromExtension]
@@ -21,10 +21,17 @@ export const App = () => {
         return () => {
             window.removeEventListener('message', handleMessagesFromExtension);
         };
-    }, [handleMessagesFromExtension]);    
+    }, [handleMessagesFromExtension]);
 
-    return <div>
-        <TableView data={messagesFromExtension}/>
-    </div>
+    if ("schema" in messagesFromExtension && "data" in messagesFromExtension) {
+        return <div>
+            <TableView data={messagesFromExtension} />
+        </div>
+    } else {
+        return <div>
+
+        </div>
+    }
+
 
 }
