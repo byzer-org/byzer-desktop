@@ -13,6 +13,7 @@ v0.0.2
 ### v0.0.3 TODO
 
 * ✅ mlsql-lang highlight based on textmate
+* ✅ Better table
 *    mlsql-lang code autocomplete
 
 
