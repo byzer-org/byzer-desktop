@@ -7,8 +7,7 @@
 			"ES2019",
 			"dom"
 		],
-		"jsx": "react",
-		"jsxFactory": "h",
+		"jsx": "react-jsx",				
 		"types": [
 			"vscode-notebook-renderer",
 			"node"

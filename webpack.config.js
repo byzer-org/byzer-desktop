@@ -92,15 +92,16 @@ const webConfig = {
 };
 
 const rendererConfig = {
-	...config,
+	...config,	
 	entry: './src/mlsql-notebook-renderer/index.tsx',
 	output: {
 		path: path.resolve(__dirname, 'dist'),
 		filename: 'renderer.js',
 		libraryTarget: 'module',
 	},
+	devtool: "source-map",
 	resolve: {
-		extensions: ['.ts', '.tsx', '.css']
+		extensions: [".ts", ".tsx", ".js", ".jsx", '.css']
 	},
 	experiments: {
 		outputModule: true,
@@ -117,7 +118,7 @@ const rendererConfig = {
 							configFile: path.resolve(__dirname, 'src/mlsql-notebook-renderer/tsconfig.json'),
 							projectReferences: true,
 							compilerOptions: {
-								module: 'esnext',
+								module: 'ES2019',
 							},
 						},
 					},

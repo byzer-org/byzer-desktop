@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 .tab-bar {
     display: flex;
     justify-content: space-between;

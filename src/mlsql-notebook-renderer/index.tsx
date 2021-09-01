@@ -1,9 +1,11 @@
-import { h, render } from 'preact';
+import * as React from 'react';
+import * as dom from 'react-dom';
 import { ActivationFunction } from 'vscode-notebook-renderer';
+import { Button } from 'antd';
 import './style.css';
 
 export const activate: ActivationFunction = (_context) => ({
 	renderOutputItem(_, element) {
-		render(<p>Error!</p>, element);
+		dom.render(<Button type={'primary'}>Button</Button>, element);
 	}
 });
