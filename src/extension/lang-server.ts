@@ -75,10 +75,11 @@ export class LangServer {
         }
 
         let clientOptions: LanguageClientOptions = {
-            documentSelector: [{ scheme: 'file', language: 'mlsql' },{ scheme: 'vscode-notebook-cell', language: 'mlsql' }]
+            documentSelector: [{ scheme: 'file', language: 'mlsql' },{ scheme: 'vscode-notebook-cell', language: 'mlsql' }],
+            initializationOptions:mlsqlConfig
         }
         const client = new LanguageClient('MLSQL', 'MLSQL Language Server', serverOptions, clientOptions)
-        let temp = client.start();
+        let temp = client.start();        
         this._context.subscriptions.push(temp)
         return client
     }
