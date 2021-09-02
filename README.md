@@ -18,7 +18,7 @@ v0.0.3
 
 ### v0.0.4 
 
-TODO
+* Realtime log
 
 
 ## Requirements
