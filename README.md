@@ -18,7 +18,7 @@ v0.0.3
 
 ### v0.0.4 
 
-* Realtime log
+* More control parameters on engine
 
 
 ## Requirements

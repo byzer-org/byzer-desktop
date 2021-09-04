@@ -79,7 +79,7 @@ export class LangServer {
             initializationOptions:mlsqlConfig
         }
         const client = new LanguageClient('MLSQL', 'MLSQL Language Server', serverOptions, clientOptions)
-        let temp = client.start();        
+        let temp = client.start();                
         this._context.subscriptions.push(temp)
         return client
     }

@@ -43,6 +43,7 @@ export class CodeManager implements vscode.Disposable {
                 includeSchema: true,
                 fetchType: "take",
                 jobName: jobName,
+                size:200,
                 owner: "admin", ...extraOpt
             })).then((response) => response.data as MLSQLExecuteResponse)
                 .catch((error) => error.response.data)

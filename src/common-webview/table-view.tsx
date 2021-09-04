@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { MLSQLExecuteResponse } from '../common/data'
 import { Table } from 'antd';
 interface IProps {

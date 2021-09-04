@@ -13,9 +13,9 @@
 			"node"
 		]
 	},
-	"references": [
+	"references": [		
 		{
-			"path": "../common"
+			"path": "../common-webview"
 		}
 	]	
 }

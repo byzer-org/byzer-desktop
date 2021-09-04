@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { MLSQLExecuteResponse } from '../common/data'
-import { Table } from 'antd';
-import { TableView } from './table-view';
+import { TableView } from '../common-webview/table-view';
 export const App = () => {
     const [messagesFromExtension, setMessagesFromExtension] = useState<MLSQLExecuteResponse>({
         schema: { fields: [] },
         data: []
     });
+
     const handleMessagesFromExtension = useCallback(
         (event: MessageEvent<any>) => {
             setMessagesFromExtension(event.data);
@@ -23,15 +23,7 @@ export const App = () => {
         };
     }, [handleMessagesFromExtension]);
 
-    if ("schema" in messagesFromExtension && "data" in messagesFromExtension) {
-        return <div>
-            <TableView data={messagesFromExtension} />
-        </div>
-    } else {
-        return <div>
-
-        </div>
-    }
-
-
+    return <div>
+        <TableView data={messagesFromExtension} />
+    </div>
 }

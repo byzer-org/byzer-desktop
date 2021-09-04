@@ -1,8 +1,7 @@
 import { TextDecoder, TextEncoder } from 'util';
 import * as vscode from 'vscode';
-import { MLSQLExecuteResponse } from '../common/data';
+import { MLSQLExecuteResponse,ToContent } from '../common/data';
 import { codeManager } from './code-manager';
-import { SqlResultWebView } from './result-webview';
 import * as uuid from 'uuid';
 import { uiProxy } from './ui-proxy';
 import { pythonToMLSQL } from '../common/hint-manager'
@@ -86,7 +85,7 @@ export class MLSQLNotebookController implements vscode.Disposable {
         this.runningCells.set(runningKey, true)
         try {
             const res = await codeManager.runRawCode(code, jobName)
-
+            
             if (typeof (res) === "string") {
                 execution.replaceOutput([
                     new vscode.NotebookCellOutput([
@@ -94,11 +93,12 @@ export class MLSQLNotebookController implements vscode.Disposable {
                     ])
                 ]);
             } else {
+                const mime = 'x-application/mlsql-notebook'
                 execution.replaceOutput([
                     new vscode.NotebookCellOutput([
-                        vscode.NotebookCellOutputItem.json(res, 'x-application/mlsql-notebook')
+                        vscode.NotebookCellOutputItem.json(res, mime)
                     ])
-                ]);
+                ]);                
             }
         } catch (e) {
 

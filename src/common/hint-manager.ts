@@ -22,9 +22,7 @@ const parse = (code: string): SQLHeadHint => {
         map(item => stripPrefix(item.trim(), "#%")).
         map(item => stripPrefix(item.trim(), "--%"))
 
-    const body = code.split("\n").
-        filter((item) => !item.trim().startsWith("#%") && !item.trim().startsWith("--%")).
-        join("\n")
+    const body = code
 
     let t = "mlsql"
     let input: string | undefined = undefined
@@ -72,11 +70,11 @@ export const pythonToMLSQL = (cell: vscode.NotebookCell): string => {
     const header = parse(cell.document.getText())
     if (cell.document.languageId === "python" || header.t === "python") {
         const input = header.input || "command"
-        const output = header.output || uuid.v4().replace("-", "")
-        const cache = header.params.get("cache") == "true" || false
+        const output = header.output || uuid.v4().replace(/-/g, "")
+        const cache = header.params.get("cache") == "true" || true
         let cacheStr = `
-        save overwrite ${output}_0 as parquet.\`/tmp/__python__/${output}\`;
-        load parquet.\`/tmp/__python__/${output}\` as ${output};
+        save overwrite ${output}_0 as parquet.\`/tmp/__python__cache.${output}\`;
+        load parquet.\`/tmp/__python__cache.${output}\` as ${output};
         `
 
         if (!cache) {
