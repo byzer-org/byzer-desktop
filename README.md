@@ -10,22 +10,23 @@ mlsql-lang is a Visual Studio Code extension that allows you to run MLSQL code i
 
 v0.0.4
 
+### v0.0.4 
+
+* ✅  More control parameters on engine
+* ✅  New include type `project` is support
+* ✅  !pyInclude also support `project` type.
+* ✅  Support html/png renderer in notebook mode.
+* ✅  More mlsql code examples  
+    
+    * [mlsql-lang-example-project/github](https://github.com/allwefantasy/mlsql-lang-example-project)
+    * [mlsql-lang-example-project/gitee](https://gitee.com/allwefantasy/mlsql-lang-example-project)
+
+
 ### v0.0.3 
 
 * ✅ mlsql-lang grammar highlight
 * ✅ Better table renderer
 * ✅ mlsql-lang code autocomplete
-
-### v0.0.4 
-
-* More control parameters on engine
-* New include type `project` is support
-* !pyInclude also support `project` type.
-* Support html/png renderer in notebook mode.
-* More mlsql code examples  
-    
-    * [mlsql-lang-example-project/github](https://github.com/allwefantasy/mlsql-lang-example-project)
-    * [mlsql-lang-example-project/gitee](https://gitee.com/allwefantasy/mlsql-lang-example-project)
 
 
 ## Requirements
