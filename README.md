@@ -22,6 +22,10 @@ v0.0.4
 * New include type `project` is support
 * !pyInclude also support `project` type.
 * Support html/png renderer in notebook mode.
+* More mlsql code examples  
+    
+    * [mlsql-lang-example-project/github](https://github.com/allwefantasy/mlsql-lang-example-project)
+    * [mlsql-lang-example-project/gitee](https://gitee.com/allwefantasy/mlsql-lang-example-project)
 
 
 ## Requirements
@@ -35,11 +39,11 @@ v0.0.4
 
 > this extension contains mlsql-lang already.
 
-Download extension from `http://download.mlsql.tech/mlsql-0.0.3.vsix` 
+Download extension from `http://download.mlsql.tech/mlsql-0.0.4.vsix` 
 
    
-   * run command `code --install-extension mlsql-0.0.3.vsix`
-   * Or Just open `mlsql-0.0.3.vsix` in vscode.
+   * run command `code --install-extension mlsql-0.0.4.vsix`
+   * Or Just open `mlsql-0.0.4.vsix` in vscode.
 
 
 ### Install From Market
@@ -66,6 +70,15 @@ Download extension from `http://download.mlsql.tech/mlsql-0.0.3.vsix`
 8. Here is notebook example:
 
 ![](docs/images/notebook.png)
+
+## Example project
+
+1. [mlsql-lang-example-project/github](https://github.com/allwefantasy/mlsql-lang-example-project)
+2. [mlsql-lang-example-project/gitee](https://gitee.com/allwefantasy/mlsql-lang-example-project)
+
+## Restart mlsql lang language server
+
+Run command in vscode:  Developer: Reload Window
 
 ## Congiguration (since 0.0.2)
 

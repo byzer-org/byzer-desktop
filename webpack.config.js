@@ -36,8 +36,8 @@ const config = {
 		new CopyWebpackPlugin({
 			patterns: [
 				{
-					from: path.join(__dirname, 'src/mlsql-lang'),
-					to: path.join(__dirname, 'dist/mlsql-lang')
+					from: path.join(__dirname, 'src','mlsql-lang'),
+					to: path.join(__dirname, 'dist','mlsql-lang')
 				}
 			]
 		})
