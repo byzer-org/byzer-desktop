@@ -21,11 +21,11 @@ export class LangServer {
 
         uiProxy.println(`Using java from JAVA_HOME:${JAVA_LANG_DIR}`)
 
-        if("java.home" in mlsqlConfig) {
+        if ("java.home" in mlsqlConfig) {
             JAVA_LANG_DIR = mlsqlConfig["java.home"]
         }
 
-        if (!JAVA_LANG_DIR) {   
+        if (!JAVA_LANG_DIR) {
             uiProxy.println(`
             Java >= 1.8 is required.
             
@@ -35,7 +35,7 @@ export class LangServer {
             `)
             return
         }
-        
+
         //-Xmx2048m
         let xmx = ""
         if ("engine.memory" in mlsqlConfig) {
@@ -52,18 +52,18 @@ export class LangServer {
             MLSQL_LANG_DIR = path.join(__dirname, "mlsql-lang", "mlsql-app_2.4-2.1.0-SNAPSHOT")
         }
 
-        const executable: string = path.join(JAVA_LANG_DIR, "bin", "java")        
+        const executable: string = path.join(JAVA_LANG_DIR, "bin", "java")
 
         const args: string[] = ["-cp",
             `${path.join(MLSQL_LANG_DIR, "main", "*")}:${path.join(MLSQL_LANG_DIR, "libs", "*")}:${path.join(MLSQL_LANG_DIR, "plugin", "*")}:${path.join(MLSQL_LANG_DIR, "spark", "*")}`]
-        
-        if(xmx){
+
+        if (xmx) {
             args.unshift(xmx)
-        }    
-        
+        }
+
         // const serverDebug = ["-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044","-Xdebug"]
         // serverDebug.forEach(item=>args.unshift(item))
-        
+
         const mainClass = "tech.mlsql.plugins.langserver.launchers.stdio.Launcher"
 
         uiProxy.println("Start MLSQL lang server: " + [...args, mainClass].join(" "))
@@ -75,11 +75,11 @@ export class LangServer {
         }
 
         let clientOptions: LanguageClientOptions = {
-            documentSelector: [{ scheme: 'file', language: 'mlsql' },{ scheme: 'vscode-notebook-cell', language: 'mlsql' }],
-            initializationOptions:mlsqlConfig
+            documentSelector: [{ scheme: 'file', language: 'mlsql' }, { scheme: 'vscode-notebook-cell', language: 'mlsql' }],
+            initializationOptions: { "spark.mlsql.client": "desktop", ...mlsqlConfig }
         }
         const client = new LanguageClient('MLSQL', 'MLSQL Language Server', serverOptions, clientOptions)
-        let temp = client.start();                
+        let temp = client.start();
         this._context.subscriptions.push(temp)
         return client
     }
