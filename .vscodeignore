@@ -8,3 +8,6 @@ vsc-extension-quickstart.md
 **/*.ts
 src/**
 out/test/**
+src/mlsql-lang-darwin-amd64.tar.gz
+src/mlsql-lang-linux-amd64.tar.gz
+src/mlsql-lang-windows-amd64.tar.gz

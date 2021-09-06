@@ -5,3 +5,6 @@ package-lock.json
 src/mlsql-lang
 dist/
 dev.sh
+src/mlsql-lang-darwin-amd64.tar.gz
+src/mlsql-lang-linux-amd64.tar.gz
+src/mlsql-lang-windows-amd64.tar.gz

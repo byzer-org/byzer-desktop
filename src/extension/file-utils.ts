@@ -22,7 +22,7 @@ export function createJsonFile(jsonFilePath: string, jsonData: any): string {
   return targetFile
 }
 
-export function readConfig(): { [key: string]: string; }  {
+export function readConfig(): { [key: string]: string; } {
   if (!workspace.workspaceFolders) return {}
   const workspaceFolder = workspace.workspaceFolders[0].uri.fsPath
   const configFilePath = path.join(workspaceFolder, ".mlsql.config")
@@ -32,9 +32,9 @@ export function readConfig(): { [key: string]: string; }  {
 
   const configStr = fs.readFileSync(configFilePath).toString()
   const config: { [key: string]: string; } = {}
-  configStr.split("\n").filter(line => line.trim() !== "").forEach(line => {
+  configStr.split("\n").filter(line => line.trim() !== "").filter(line => !line.trim().startsWith("#")).forEach(line => {
     const [key, value] = line.split("=", 2)
-    config[key] = value
+    config[key.trim()] = value.trim()
   })
   return config
 
