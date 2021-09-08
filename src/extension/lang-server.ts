@@ -30,7 +30,7 @@ export class LangServer {
             Java >= 1.8 is required.
             
             Try to:
-                1. export SPARK_HOME 
+                1. export JAVA_HOME 
                 2. Or configure java.home in .mlsql.config.
             `)
             return
