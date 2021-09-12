@@ -54,7 +54,7 @@ const config = {
 							configFile: path.resolve(__dirname, 'src/extension/tsconfig.json'),
 							projectReferences: true,
 							compilerOptions: {
-								module: 'ES2019',
+								module: 'esnext',
 							},
 						},
 					},
@@ -118,7 +118,7 @@ const rendererConfig = {
 							configFile: path.resolve(__dirname, 'src/mlsql-notebook-renderer/tsconfig.json'),
 							projectReferences: true,
 							compilerOptions: {
-								module: 'ES2019',
+								module: 'esnext',
 							},
 						},
 					},
@@ -163,7 +163,7 @@ const webviewConfig = {
 							configFile: path.resolve(__dirname, 'src/common-webview/tsconfig.json'),
 							projectReferences: true,
 							compilerOptions: {
-								module: 'ES2019',
+								module: 'exnext',
 							},
 						},
 					},

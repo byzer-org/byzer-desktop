@@ -3,12 +3,8 @@
 	"compilerOptions": {
 		"composite": true,
 		"allowSyntheticDefaultImports": true,
-		"rootDir": ".",
-		"lib": [
-			"ES2019",
-			"dom"
-		],
-		"jsx": "react-jsx",
+		"rootDir": ".",	
+		"jsx": "react-jsx",		
 		"types": [
 			"node"
 		]

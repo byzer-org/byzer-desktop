@@ -2,12 +2,9 @@
 	"extends": "../tsconfig.base.json",
 	"compilerOptions": {
         "composite": true,
-		"rootDir": ".",
-		"lib": [
-			"ES2019",
-			"dom"
-		],
-		"jsx": "react-jsx",				
+		"rootDir": ".",		
+		"jsx": "react-jsx",	
+		"outDir": "../../out/mlsql-notebook-renderer",			
 		"types": [
 			"vscode-notebook-renderer",
 			"node"

@@ -3,7 +3,10 @@
 		"module": "commonjs",
 		"target": "ES2019",
 		"outDir": "out",
-		"lib": ["ES2019"],
+		"lib": [
+			"esnext",
+			"dom"
+		],
 		"sourceMap": true,
 		"rootDir": "src/extension",
 		"strict": true,
