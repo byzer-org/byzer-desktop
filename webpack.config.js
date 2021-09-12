@@ -54,7 +54,7 @@ const config = {
 							configFile: path.resolve(__dirname, 'src/extension/tsconfig.json'),
 							projectReferences: true,
 							compilerOptions: {
-								module: 'esnext',
+								module: 'ES2019',
 							},
 						},
 					},

@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+@import '~antd/dist/antd.dark.css';
 .tab-bar {
     display: flex;
     justify-content: space-between;
