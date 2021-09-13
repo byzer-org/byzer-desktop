@@ -40,18 +40,23 @@ v0.0.4
 
 > this extension contains mlsql-lang already.
 
-Download extension from `http://download.mlsql.tech/mlsql-0.0.4.vsix` 
+Download extension from `https://mlsql-downloads.kyligence.io/2.1.0/mlsql-0.0.4.vsix` 
 
    
    * run command `code --install-extension mlsql-0.0.4.vsix`
-   * Or Just open `mlsql-0.0.4.vsix` in vscode.
+   * Or Just open `mlsql-0.0.4.vsix` in vscode in market panel
 
+[](https://mlsql-docs.kyligence.io/latest/zh-hans/howtouse/images/img_local_install.png)   
 
 ### Install From Market
 
-1. Search mlsql in market and install it.
-2. Download mlsql-lang from `http://download.mlsql.tech/mlsql-lang.tar.gz` 
-3. Extract mlsql-lang.tar.gz and configure the path by `engine.home` in `.mlsq.config`.
+1. Search `mlsql` in market and install it.
+2. Download mlsql-lang from `https://mlsql-downloads.kyligence.io/2.1.0/` 
+3. Extract mlsql-lang and configure the path by `engine.home` in `.mlsq.config`.
+
+### Others
+
+[MLSQL 桌面版使用 (Mac/Linux)](https://mlsql-docs.kyligence.io/latest/zh-hans/howtouse/mlsql_desktop_install.html)
 
 ## Usage
 
