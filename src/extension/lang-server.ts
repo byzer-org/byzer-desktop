@@ -14,7 +14,7 @@ export class LangServer {
     }
 
     public create(): LanguageClient | undefined {
-        const { JAVA_HOME, MLSQL_HOME } = process.env
+        const { JAVA_HOME, MLSQL_LANG_HOME } = process.env
         let JAVA_LANG_DIR = JAVA_HOME
 
         const mlsqlConfig = readConfig()
@@ -43,7 +43,7 @@ Try to:
             xmx = `-Xmx${mlsqlConfig["engine.memory"]}`
         }
 
-        let MLSQL_LANG_DIR = MLSQL_HOME
+        let MLSQL_LANG_DIR = MLSQL_LANG_HOME
 
         if ("engine.home" in mlsqlConfig) {
             uiProxy.println(`Using mlsql lang from engine.home in .mlsql.config :${mlsqlConfig["engine.home"]}`)
