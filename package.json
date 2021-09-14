@@ -2,7 +2,7 @@
     "name": "mlsql",
     "displayName": "mlsql",
     "description": "The Programming Language Designed For Big Data and AI",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "repository": {
         "url": "https://github.com/allewfantasy/mlsql-lang-vscode-plugin"
     },
@@ -17,7 +17,7 @@
         "onLanguage:mlsql",
         "onLanguage:mlsql-notebook",
         "onCommand:mlsql.run",
-        "onNotebook:mlsql-notebook-provider"
+        "onNotebook:mlsql-notebook"
     ],
     "publisher": "allwefantasy",
     "scripts": {

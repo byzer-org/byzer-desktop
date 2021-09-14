@@ -22,16 +22,17 @@ export class LangServer {
         uiProxy.println(`Using java from JAVA_HOME:${JAVA_LANG_DIR}`)
 
         if ("java.home" in mlsqlConfig) {
+            uiProxy.println(`Using java from java.home in .mlsql.config :${mlsqlConfig["java.home"]}`)
             JAVA_LANG_DIR = mlsqlConfig["java.home"]
         }
 
         if (!JAVA_LANG_DIR) {
             uiProxy.println(`
-            Java >= 1.8 is required.
-            
-            Try to:
-                1. export JAVA_HOME 
-                2. Or configure java.home in .mlsql.config.
+Java >= 1.8 is required.
+
+Try to:
+    1. export JAVA_HOME 
+    2. Or configure java.home in .mlsql.config.
             `)
             return
         }
@@ -45,6 +46,7 @@ export class LangServer {
         let MLSQL_LANG_DIR = MLSQL_HOME
 
         if ("engine.home" in mlsqlConfig) {
+            uiProxy.println(`Using mlsql lang from engine.home in .mlsql.config :${mlsqlConfig["engine.home"]}`)
             MLSQL_LANG_DIR = mlsqlConfig["engine.home"]
         }
 
