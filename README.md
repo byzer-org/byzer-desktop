@@ -90,7 +90,7 @@ Download extension from `https://mlsql-downloads.kyligence.io/2.1.0/mlsql-0.0.4.
 
 Run command in vscode:  Developer: Reload Window
 
-## Congiguration (since 0.0.2)
+## Congiguration (>= 0.0.2)
 
 You can configure MLSQL Lang server with file `.mlsql.config`  in your project (root path).
 
@@ -124,7 +124,7 @@ You can install them like this:
 
 ## Know Issues
 
-### .mlsqlnb have no plugin for it
+### .mlsqlnb have no plugin for it ( <=v0.0.4)
 
 If you reopen the project, when notebook is open before the mlsql-lang is activated,then 
 the following error will happen:
@@ -133,7 +133,7 @@ the following error will happen:
 
 Just close/open the notebook(.mlsqlnb) and everything goes Ok.
 
-### mlsql lang server fails to quit when your workspace closed
+### mlsql lang server fails to quit when your workspace closed ( <= v0.0.3)
 
 Sometimes the lang server will not quit properly when you close your workspace.
 Try using flowing command to find the pid and kill it.
