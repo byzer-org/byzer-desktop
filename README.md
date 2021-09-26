@@ -35,8 +35,12 @@ v0.0.5
 
 ## Requirements
 
-1. JDK 1.8+ is required in your system.
-2. mlsql-lang is only tested in MacOS/Linux though this extension works in Windows.
+1. JDK 1.8+ is required in your system. [JDK8-Mac ](https://www.openlogic.com/openjdk-downloads?field_java_parent_version_target_id=416&field_operating_system_target_id=431&field_architecture_target_id=391&field_java_package_target_id=396)/[JDK8-Linux](https://www.openlogic.com/openjdk-downloads?field_java_parent_version_target_id=416&field_operating_system_target_id=426&field_architecture_target_id=391&field_java_package_target_id=396)
+2. [Visuial Studio Code](https://code.visualstudio.com/)
+
+## Limitation
+
+mlsql-lang is only tested in MacOS/Linux though this extension works in Windows.
 
 ## Installation
 
@@ -44,7 +48,7 @@ v0.0.5
 
 > this extension contains mlsql-lang already.
 
-Download extension from `https://mlsql-downloads.kyligence.io/2.1.0/mlsql-0.0.5.vsix` 
+Download extension from `https://mlsql-downloads.kyligence.io/2.1.0/mlsql-0.0.5.vsix`  or `http://download.mlsql.tech/mlsql-0.0.5.vsix`
 
    
    * run command `code --install-extension mlsql-0.0.5.vsix`
