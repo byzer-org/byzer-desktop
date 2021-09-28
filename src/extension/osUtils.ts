@@ -30,6 +30,6 @@ export function isExec(exec:string):boolean {
   }
 
 export function javaName():string {
-	if(!isWindows) return "java.exe"
+	if(isWindows()) return "java.exe"
 	else return "java"
 }  
