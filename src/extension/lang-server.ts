@@ -8,6 +8,7 @@ import {
 import * as path from 'path';
 import { uiProxy } from "./ui-proxy";
 import { readConfig } from "./file-utils";
+import * as utils from "./osUtils"
 export class LangServer {
     private _context: vscode.ExtensionContext;
     constructor(context: vscode.ExtensionContext) {
@@ -22,6 +23,11 @@ export class LangServer {
         
         if (fs.existsSync(jdkPath)) {
             JAVA_LANG_DIR = jdkPath
+            //check command executable
+            const javaCommand = path.join(JAVA_LANG_DIR, "bin", "java")
+            if(!utils.isExec(javaCommand)){
+               utils.chmodx(javaCommand)
+            }
         }
 
         const mlsqlConfig = readConfig()
