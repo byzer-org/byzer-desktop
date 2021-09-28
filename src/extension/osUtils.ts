@@ -28,3 +28,8 @@ export function isExec(exec:string):boolean {
 	}
 	return true		
   }
+
+export function javaName():string {
+	if(!isWindows) return "java.exe"
+	else return "java"
+}  

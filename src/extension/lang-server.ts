@@ -24,7 +24,7 @@ export class LangServer {
         if (fs.existsSync(jdkPath)) {
             JAVA_LANG_DIR = jdkPath
             //check command executable
-            const javaCommand = path.join(JAVA_LANG_DIR, "bin", "java")
+            const javaCommand = path.join(JAVA_LANG_DIR, "bin", utils.javaName())
             if(!utils.isExec(javaCommand)){
                utils.chmodx(javaCommand)
             }
@@ -67,7 +67,7 @@ Try to:
             MLSQL_LANG_DIR = path.join(__dirname, "mlsql-lang")
         }
 
-        const executable: string = path.join(JAVA_LANG_DIR, "bin", "java")
+        const executable: string = path.join(JAVA_LANG_DIR, "bin", utils.javaName())
 
         const args: string[] = ["-cp",
             `${path.join(MLSQL_LANG_DIR, "main", "*")}:${path.join(MLSQL_LANG_DIR, "libs", "*")}:${path.join(MLSQL_LANG_DIR, "plugin", "*")}:${path.join(MLSQL_LANG_DIR, "spark", "*")}`]
