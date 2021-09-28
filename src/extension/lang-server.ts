@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import * as fs from 'fs';
 import {
     LanguageClient,
     LanguageClientOptions,
@@ -17,6 +18,8 @@ export class LangServer {
         const { JAVA_HOME, MLSQL_LANG_HOME } = process.env
         let JAVA_LANG_DIR = JAVA_HOME
 
+        const MLSQL_APP_NAME="mlsql-app_2.4-2.1.0-SNAPSHOT"
+
         const mlsqlConfig = readConfig()
 
         uiProxy.println(`Using java from JAVA_HOME:${JAVA_LANG_DIR}`)
@@ -24,6 +27,14 @@ export class LangServer {
         if ("java.home" in mlsqlConfig) {
             uiProxy.println(`Using java from java.home in .mlsql.config :${mlsqlConfig["java.home"]}`)
             JAVA_LANG_DIR = mlsqlConfig["java.home"]
+        }
+
+        //check current dir jdk8
+        if (!JAVA_LANG_DIR) {            
+           const jdkPath = path.join(__dirname, "mlsql-lang", "jdk8")
+           if(fs.existsSync(jdkPath)){
+               JAVA_LANG_DIR = jdkPath
+           }
         }
 
         if (!JAVA_LANG_DIR) {
@@ -51,7 +62,7 @@ Try to:
         }
 
         if (!MLSQL_LANG_DIR) {
-            MLSQL_LANG_DIR = path.join(__dirname, "mlsql-lang", "mlsql-app_2.4-2.1.0-SNAPSHOT")
+            MLSQL_LANG_DIR = path.join(__dirname, "mlsql-lang", MLSQL_APP_NAME)
         }
 
         const executable: string = path.join(JAVA_LANG_DIR, "bin", "java")
