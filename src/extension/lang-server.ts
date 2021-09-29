@@ -82,7 +82,7 @@ Try to:
         }
         
         if(utils.isWindows()){
-            args.unshift("-Dhadoop.home.dir="+path.join(JAVA_LANG_DIR, "hadoop-3.0.0"))
+            args.unshift("-Dhadoop.home.dir="+path.join(MLSQL_LANG_DIR, "hadoop-3.0.0"))
         }
         // const serverDebug = ["-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044","-Xdebug"]
         // serverDebug.forEach(item=>args.unshift(item))
