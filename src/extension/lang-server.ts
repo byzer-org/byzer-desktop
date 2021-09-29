@@ -68,9 +68,14 @@ Try to:
         }
 
         const executable: string = path.join(JAVA_LANG_DIR, "bin", utils.javaName())
+        let classPathSpliter = ":"
+
+        if(utils.isWindows()){
+            classPathSpliter = ";"
+        }
 
         const args: string[] = ["-cp",
-            `${path.join(MLSQL_LANG_DIR, "main", "*")}:${path.join(MLSQL_LANG_DIR, "libs", "*")}:${path.join(MLSQL_LANG_DIR, "plugin", "*")}:${path.join(MLSQL_LANG_DIR, "spark", "*")}`]
+            `${path.join(MLSQL_LANG_DIR, "main", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "libs", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "plugin", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "spark", "*")}`]
 
         if (xmx) {
             args.unshift(xmx)
