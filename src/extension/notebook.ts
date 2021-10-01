@@ -1,6 +1,6 @@
 import { TextDecoder, TextEncoder } from 'util';
 import * as vscode from 'vscode';
-import { MLSQLExecuteResponse,ToContent } from '../common/data';
+import { MLSQLExecuteResponse, ToContent } from '../common/data';
 import { codeManager } from './code-manager';
 import * as uuid from 'uuid';
 import { uiProxy } from './ui-proxy';
@@ -62,13 +62,13 @@ export class MLSQLNotebookController implements vscode.Disposable {
         }
     }
 
-    private _execute(
+    private async _execute(
         cells: vscode.NotebookCell[],
         _notebook: vscode.NotebookDocument,
         _controller: vscode.NotebookController
-    ): void {
+    ): Promise<void> {
         for (let cell of cells) {
-            this._doExecution(cell);
+            await this._doExecution(cell);
         }
     }
 
@@ -84,8 +84,12 @@ export class MLSQLNotebookController implements vscode.Disposable {
         const code = pythonToMLSQL(cell)
         this.runningCells.set(runningKey, true)
         try {
-            const res = await codeManager.runRawCode(code, jobName)
-            
+            let res = await codeManager.runRawCode(code, jobName)
+            // this is a bug in mlsql lang
+            if (res === "{[]}") {
+                res = {schema:{fields:[]},data:[]}
+            }
+
             if (typeof (res) === "string") {
                 execution.replaceOutput([
                     new vscode.NotebookCellOutput([
@@ -98,7 +102,7 @@ export class MLSQLNotebookController implements vscode.Disposable {
                     new vscode.NotebookCellOutput([
                         vscode.NotebookCellOutputItem.json(res, mime)
                     ])
-                ]);                
+                ]);
             }
         } catch (e) {
 

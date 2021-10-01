@@ -25,7 +25,8 @@ export const activate: ActivationFunction = (_context) => ({
 			return 
 		}
 
-		const data = c.content as MLSQLExecuteResponse
+		let  data = c.content as MLSQLExecuteResponse
+				
 		const columns = data.schema.fields.map(item => {
 			return {
 				title: item.name,
