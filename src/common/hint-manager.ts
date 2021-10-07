@@ -71,7 +71,7 @@ export const pythonToMLSQL = (cell: vscode.NotebookCell): string => {
     if (cell.document.languageId === "python" || header.t === "python") {
         const input = header.input || "command"
         const output = header.output || uuid.v4().replace(/-/g, "")
-        const cache = header.params.get("cache") == "true" || true
+        const cache = header.params.get("cache") != "false"
         let cacheStr = `
         save overwrite ${output}_0 as parquet.\`/tmp/__python__cache.${output}\`;
         load parquet.\`/tmp/__python__cache.${output}\` as ${output};
@@ -94,12 +94,12 @@ export const pythonToMLSQL = (cell: vscode.NotebookCell): string => {
         const schema = getThenMapOrElse(
             header.params,
             "schema",
-            (item) => ` !python conf "schema=${item}"; `, "")
+            (item) => ` !python conf '''schema=${item}'''; `, "")
 
         const env = getThenMapOrElse(
             header.params,
             "env",
-            (item) => ` !python env "PYTHON_ENV=${item}"; `, "")
+            (item) => ` !python env '''PYTHON_ENV=${item}'''; `, "")
 
         const dataMode = getThenMapOrElse(
             header.params,
