@@ -14,8 +14,7 @@ interface TableColumn {
 	render: (value:string)=>string|React.ReactElement<any>
 }
 
-const setRender = (column:TableColumn) => {	
-	console.log(column)	
+const setRender = (column:TableColumn) => {		
 	if (column.key === "html") {            
 		column.render = value => <pre>{value.substring(0,300)}</pre>
 		return
