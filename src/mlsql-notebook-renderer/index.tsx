@@ -49,7 +49,7 @@ const setRender = (column:TableColumn) => {
 		return	
 	}
 
-	column.render = value => <span>No Suitable View....</span>
+	column.render = _ => <span>No Suitable View....</span>
 	return	
 	
 }
