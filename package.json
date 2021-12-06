@@ -1,6 +1,6 @@
 {
     "name": "mlsql",
-    "displayName": "mlsql",
+    "displayName": "Kolo-lang",
     "description": "The Programming Language Designed For Big Data and AI",
     "version": "0.0.6",
     "repository": {
@@ -37,6 +37,10 @@
         "commands": [
             {
                 "command": "mlsql.run",
+                "title": "Kolo: Run"
+            },
+            {
+                "command": "mlsql.run",
                 "title": "MLSQL: Run"
             }
         ],
@@ -44,21 +48,26 @@
             {
                 "id": "mlsql",
                 "aliases": [
+                    "Kolo-lang",
                     "MLSQL",
-                    "mlsql"
+                    "mlsql",
+                    "KOLO",
+                    "kolo",
+                    "Kolo-lang"
                 ],
                 "extensions": [
-                    "mlsql"
+                    "mlsql","kolo"
                 ],
                 "configuration": "./language-configuration.json"
             },
             {
                 "id": "mlsql-notebook",
                 "aliases": [
-                    "MLSQL NoteBook"
+                    "Kolo NoteBook"
                 ],
                 "filenamePatterns": [
-                    "*.mlsqlnb"
+                    "*.mlsqlnb",
+                    "*.kolonb"
                 ]
             }
         ],
@@ -87,10 +96,13 @@
             {
                 "id": "mlsql-notebook",
                 "type": "mlsql-notebook",
-                "displayName": "MLSQL Notebook",
+                "displayName": "Kolo Notebook",
                 "selector": [
                     {
                         "filenamePattern": "*.mlsqlnb"
+                    },
+                    {
+                        "filenamePattern": "*.kolonb"
                     }
                 ]
             }

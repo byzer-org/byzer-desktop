@@ -126,7 +126,7 @@ export const pythonToMLSQL = (cell: vscode.NotebookCell): string => {
         ''';
         ${cacheStr}
           `
-    }
+    }    
     return cell.document.getText()
 }
 
