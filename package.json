@@ -2,7 +2,7 @@
     "name": "mlsql",
     "displayName": "Kolo-lang",
     "description": "The Programming Language Designed For Big Data and AI",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "repository": {
         "url": "https://github.com/allewfantasy/mlsql-lang-vscode-plugin"
     },
