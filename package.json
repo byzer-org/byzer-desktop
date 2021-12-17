@@ -1,6 +1,6 @@
 {
     "name": "mlsql",
-    "displayName": "Kolo-lang",
+    "displayName": "Byzer-lang",
     "description": "The Programming Language Designed For Big Data and AI",
     "version": "0.0.7",
     "repository": {
@@ -37,7 +37,7 @@
         "commands": [
             {
                 "command": "mlsql.run",
-                "title": "Kolo: Run"
+                "title": "Byzer: Run"
             },
             {
                 "command": "mlsql.run",
@@ -48,26 +48,26 @@
             {
                 "id": "mlsql",
                 "aliases": [
-                    "Kolo-lang",
+                    "Byzer-lang",
                     "MLSQL",
                     "mlsql",
-                    "KOLO",
-                    "kolo",
-                    "Kolo-lang"
+                    "BYZER",
+                    "byzer",
+                    "byzer-lang"
                 ],
                 "extensions": [
-                    "mlsql","kolo"
+                    "mlsql","byzer"
                 ],
                 "configuration": "./language-configuration.json"
             },
             {
                 "id": "mlsql-notebook",
                 "aliases": [
-                    "Kolo NoteBook"
+                    "Byzer NoteBook"
                 ],
                 "filenamePatterns": [
                     "*.mlsqlnb",
-                    "*.kolonb"
+                    "*.byzernb"
                 ]
             }
         ],
@@ -96,13 +96,13 @@
             {
                 "id": "mlsql-notebook",
                 "type": "mlsql-notebook",
-                "displayName": "Kolo Notebook",
+                "displayName": "Byzer Notebook",
                 "selector": [
                     {
                         "filenamePattern": "*.mlsqlnb"
                     },
                     {
-                        "filenamePattern": "*.kolonb"
+                        "filenamePattern": "*.byzernb"
                     }
                 ]
             }
