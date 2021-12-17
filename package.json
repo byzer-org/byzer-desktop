@@ -84,7 +84,7 @@
         "notebookRenderer": [
             {
                 "id": "mlsql-notebook",
-                "displayName": "MLSQL Notebook Renderer",
+                "displayName": "Byzer Notebook Renderer",
                 "entrypoint": "./dist/renderer.js",
                 "requiresMessaging": "optional",
                 "mimeTypes": [
