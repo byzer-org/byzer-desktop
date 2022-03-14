@@ -32,11 +32,11 @@ export class CodeManager implements vscode.Disposable {
             let extraOpt: { [key: string]: string } = {}
 
             for (let key in this._config) {
-                if (key.startsWith("user.")) {
-                    extraOpt[key.split("\\.")[1]] = this._config[key]
+                if (key.startsWith("user.")) {                    
+                    extraOpt[key.split(".")[1]] = this._config[key]
                 }
             }
-
+            
             return HTTP.default.post(engineUrl + "/run/script", qs.stringify({
                 sql: rawCode,
                 skipAuth: false,
