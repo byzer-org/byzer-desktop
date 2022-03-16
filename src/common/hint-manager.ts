@@ -121,9 +121,7 @@ export const pythonToMLSQL = (cell: vscode.NotebookCell): string => {
         outputTable="${output}_0" and
         ${confTableOpt}
         ${model}
-        code='''
-        ${header.body}
-        ''';
+        code='''${header.body}''';
         ${cacheStr}
           `
     }    
