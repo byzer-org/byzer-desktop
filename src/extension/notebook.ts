@@ -1,6 +1,6 @@
 import { TextDecoder, TextEncoder } from 'util';
 import * as vscode from 'vscode';
-import { MLSQLExecuteResponse, ToContent } from '../common/data';
+import { filterPythonError, MLSQLExecuteResponse, ToContent } from '../common/data';
 import { codeManager } from './code-manager';
 import * as uuid from 'uuid';
 import { uiProxy } from './ui-proxy';
@@ -91,9 +91,13 @@ export class MLSQLNotebookController implements vscode.Disposable {
             }
 
             if (typeof (res) === "string") {
+                let newRes = res
+                if(cell.document.languageId === "python") {
+                    newRes = filterPythonError(res)
+                }                
                 execution.replaceOutput([
                     new vscode.NotebookCellOutput([
-                        vscode.NotebookCellOutputItem.error(new Error(res))
+                        vscode.NotebookCellOutputItem.error(new Error(newRes))
                     ])
                 ]);
             } else {

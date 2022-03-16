@@ -21,3 +21,29 @@ export const ToContent = (res: MLSQLExecuteResponse): Content => {
 
 }
 
+export const filterPythonError = (s:string):string => {
+    const res = []
+    let start = false
+    let shouldBreak = false
+
+    for (let line of s.split(/\r?\n/)) {
+        if(shouldBreak) continue
+
+        if(start && line.includes("tech.mlsql")) {
+           start = false
+           shouldBreak = true
+        }
+        if(start) {
+            res.push(line)
+        }
+       if(!start && line.trimLeft().startsWith("File")) {
+           start = true
+           res.push(line)
+       }       
+    }
+    if(res.length === 0) {
+        return s
+    }
+    return res.join("\n")
+
+}
