@@ -97,7 +97,7 @@ export class MLSQLNotebookController implements vscode.Disposable {
                 }                
                 execution.replaceOutput([
                     new vscode.NotebookCellOutput([
-                        vscode.NotebookCellOutputItem.error(new Error(newRes))
+                        vscode.NotebookCellOutputItem.text(newRes)
                     ])
                 ]);
             } else {

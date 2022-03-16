@@ -29,7 +29,7 @@ const setRender = (column:TableColumn) => {
 	if(typeof(column.tpl) === "object"){
 		column.tpl as {type:string,elementType:string,}
 		column.render = value => <span>{                
-			JSON.stringify(value).substring(0, 300) 
+			(JSON.stringify(value) || "").substring(0, 300) 
 		}</span>
 	    return
 	}
