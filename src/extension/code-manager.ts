@@ -12,6 +12,9 @@ export class CodeManager implements vscode.Disposable {
     private _runFromExplorer: boolean;
     private _document: vscode.TextDocument | null;
     private _config: { [key: string]: string; }
+
+    public static port:Number = 9003
+
     constructor() {
         this._isRunning = false
         this._runFromExplorer = false
@@ -24,7 +27,7 @@ export class CodeManager implements vscode.Disposable {
 
     public async runRawCode(rawCode: string, jobName: string): Promise<MLSQLExecuteResponse | string> {
         try {
-            let engineUrl = this._config["engine.url"] || "http://127.0.0.1:9003"
+            let engineUrl = this._config["engine.url"] || "http://127.0.0.1:" + CodeManager.port
             if (engineUrl.endsWith("/")) {
                 engineUrl = engineUrl.slice(0, engineUrl.length - 1)
             }

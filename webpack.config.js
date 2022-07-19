@@ -25,7 +25,7 @@ const config = {
 			"util": require.resolve("util/"),
 			"os": require.resolve("os-browserify/browser"),
 			"path": require.resolve("path-browserify"),
-			"fs": false
+			"fs": false			
 		}
 	},
 	plugins: [
@@ -173,4 +173,4 @@ const webviewConfig = {
 	}
 };
 
-module.exports = [nodeConfig, webConfig, rendererConfig, webviewConfig];
+module.exports = [nodeConfig,webConfig, rendererConfig, webviewConfig];

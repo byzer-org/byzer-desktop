@@ -56,7 +56,8 @@
                     "byzer-lang"
                 ],
                 "extensions": [
-                    "mlsql","byzer"
+                    "mlsql",
+                    "byzer"
                 ],
                 "configuration": "./language-configuration.json"
             },
@@ -113,7 +114,9 @@
         "axios": "^0.21.1",
         "json5-to-table": "^0.1.5",
         "lodash": "^4.17.21",
+        "net": "^1.0.2",
         "object-assign": "^4.1.1",
+        "portfinder": "^1.0.28",
         "qs": "^6.10.1",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",

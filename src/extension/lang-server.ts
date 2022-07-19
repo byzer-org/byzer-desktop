@@ -10,9 +10,13 @@ import { uiProxy } from "./ui-proxy";
 import { readConfig } from "./file-utils";
 import * as utils from "./osUtils"
 export class LangServer {
+    
     private _context: vscode.ExtensionContext;
-    constructor(context: vscode.ExtensionContext) {
+    private _port: Number;
+
+    constructor(context: vscode.ExtensionContext,port: Number) {
         this._context = context
+        this._port = port
     }
 
     public create(): LanguageClient | undefined {
@@ -99,10 +103,10 @@ Try to:
 
         let clientOptions: LanguageClientOptions = {
             documentSelector: [{ scheme: 'file', language: 'mlsql' }, { scheme: 'vscode-notebook-cell', language: 'mlsql' }],
-            initializationOptions: { "spark.mlsql.client": "desktop", ...mlsqlConfig }
+            initializationOptions: { "spark.mlsql.client": "desktop","engine.streaming.driver.port": this._port.toString(), ...mlsqlConfig }
         }
         const client = new LanguageClient('MLSQL', 'MLSQL Language Server', serverOptions, clientOptions)
-        let temp = client.start();
+        let temp = client.start();          
         this._context.subscriptions.push(temp)
         return client
     }
