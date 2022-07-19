@@ -1,15 +1,21 @@
 import { workspace, ExtensionContext, commands, Uri, } from 'vscode';
 import { LanguageClient } from 'vscode-languageclient/node';
 import { LangServer } from './lang-server';
-import { codeManager } from './code-manager';
+import { codeManager,CodeManager } from './code-manager';
 import { executeAndRender } from './commands-action';
 import { MLSQLNotebookController, MLSQLNotebookSerializer } from './notebook';
+import getPort from 'get-port';
+
 
 let client: LanguageClient | undefined;
 
-export function activate(context: ExtensionContext) {
-    const langServer = new LangServer(context)
+export async function activate(context: ExtensionContext) {
+
+    const port =  await getPort()
+    CodeManager.port = port
+    const langServer = new LangServer(context,port)
     client = langServer.create()
+    
     // const dataPreviewExt = extUtils.loadExtentionIfNeed("RandomFractalsInc.vscode-data-preview")
     const run = commands.registerCommand("mlsql.run", (fileUri: Uri) => {
         executeAndRender(context, fileUri)
