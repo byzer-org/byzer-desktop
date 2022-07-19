@@ -4,14 +4,14 @@ import { LangServer } from './lang-server';
 import { codeManager,CodeManager } from './code-manager';
 import { executeAndRender } from './commands-action';
 import { MLSQLNotebookController, MLSQLNotebookSerializer } from './notebook';
-import getPort from 'get-port';
-
+import {getPortPromise} from 'portfinder'
 
 let client: LanguageClient | undefined;
 
 export async function activate(context: ExtensionContext) {
-
-    const port =  await getPort()
+    
+    const port = await getPortPromise()
+    
     CodeManager.port = port
     const langServer = new LangServer(context,port)
     client = langServer.create()

@@ -173,4 +173,4 @@ const webviewConfig = {
 	}
 };
 
-module.exports = [nodeConfig, rendererConfig, webviewConfig];
+module.exports = [nodeConfig,webConfig, rendererConfig, webviewConfig];
