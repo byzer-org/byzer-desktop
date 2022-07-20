@@ -73,21 +73,24 @@ export const activate: ActivationFunction = (_context) => ({
 			return 
 		}
 
-		let  data = c.content as MLSQLExecuteResponse
-				
-		const columns = data.schema.fields.map(item => {
-			const newItem =  {
-				title: item.name,
-				dataIndex: item.name,
-				key: item.name,
-				tpl: item.type,
-				render: (value:any):string|React.ReactElement<any>=>{ return value}				
-			}
-
-			setRender(newItem)
-			return newItem
-
-		})
+		let  data = c.content as MLSQLExecuteResponse || []
+		let columns:any[] = []
+		
+		if(data.schema != null) {
+			columns = data.schema.fields.map(item => {
+				const newItem =  {
+					title: item.name,
+					dataIndex: item.name,
+					key: item.name,
+					tpl: item.type,
+					render: (value:any):string|React.ReactElement<any>=>{ return value}				
+				}
+	
+				setRender(newItem)
+				return newItem
+	
+			})
+		}
 		dom.render(<Table columns={columns} dataSource={data.data} />, element);
 
 	}

@@ -9,7 +9,10 @@ export interface Content {
     content: any
 }
 
-export const ToContent = (res: MLSQLExecuteResponse): Content => {
+export const ToContent = (res: MLSQLExecuteResponse): Content => { 
+    if(res.schema == null) {
+        return { mime: "json", content: res } 
+    }   
     const mimeOpt = res.schema.fields.filter(item => item.name === "mime")
     const contentOpt = res.schema.fields.filter(item => item.name === "content")
     if (mimeOpt.length !== 0 && contentOpt.length !== 0) {
