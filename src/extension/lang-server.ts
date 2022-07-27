@@ -23,7 +23,10 @@ export class LangServer {
         const { JAVA_HOME, MLSQL_LANG_HOME } = process.env
         let JAVA_LANG_DIR = JAVA_HOME
 
-        const jdkPath = path.join(__dirname, "mlsql-lang", "jdk8")
+        let jdkPath = path.join(__dirname, "mlsql-lang", "jdk8")
+        if (utils.isDarwin()) {
+            jdkPath = path.join(__dirname,"mlsql-lang","jdk8","Contents","Home")
+        }
         
         if (fs.existsSync(jdkPath)) {
             JAVA_LANG_DIR = jdkPath

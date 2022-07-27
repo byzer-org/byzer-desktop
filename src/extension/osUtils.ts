@@ -12,6 +12,11 @@ export function isUnix(): boolean {
 		|| platform === "openbsd";
 }
 
+export function isDarwin(): boolean {
+	let platform = process.platform;
+	return platform === "darwin";
+}
+
 export function chmodx(exec:string):void {
 	fs.chmodSync(exec, '755');
 }
