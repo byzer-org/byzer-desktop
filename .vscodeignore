@@ -13,3 +13,4 @@ src/mlsql-lang-linux-amd64.tar.gz
 src/mlsql-lang-windows-amd64.tar.gz
 dev.sh
 *.vsix
+temp/
