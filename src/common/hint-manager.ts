@@ -32,7 +32,7 @@ const parse = (code: string): SQLHeadHint => {
         if (!header.includes("=")) {
             t = header
         } else {
-            const [k, _v] = header.split("=", 2)
+            const [k, _v] = header.split(/=(.+)/, 2)
             let v = _v
             switch (k) {
                 case "input":
