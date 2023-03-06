@@ -111,11 +111,32 @@ export const pythonToMLSQL = (cell: vscode.NotebookCell): string => {
             "runIn",
             (item) => ` !python conf "runIn=${item}"; `, "")
 
+        const pythonExec = getThenMapOrElse(
+            header.params,
+            "pythonExec",
+            (item) => ` !python conf "pythonExec=${item}"; `, ""
+        ) 
+        
+        const pythonOutputEncoding = getThenMapOrElse(
+            header.params,
+            "pythonOutputEncoding",
+            (item) => ` !python conf "pythonOutputEncoding=${item}"; `, ""
+        )
+
+        const userCacheStr = getThenMapOrElse(
+            header.params,
+            "cacheStr",
+            (item) => ` !python conf "cacheStr=${item}"; `, ""
+        )
+
         return `
         ${schema}
         ${env}
         ${dataMode}
         ${runIn}
+        ${pythonExec}
+        ${pythonOutputEncoding}
+        ${userCacheStr}
         run command as Ray.\`\` where
         inputTable="${input}" and
         outputTable="${output}_0" and
