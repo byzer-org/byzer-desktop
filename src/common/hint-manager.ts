@@ -66,7 +66,7 @@ const getThenMapOrElse = (container: Map<string, String>, name: string, _map: (_
     return v
 }
 
-export const pythonToMLSQL = (cell: vscode.NotebookCell): string => {
+export const rewriteSQL = (cell: vscode.NotebookCell): string => {
     const header = parse(cell.document.getText())
     if (cell.document.languageId === "python" || header.t === "python") {
         const input = header.input || "command"
@@ -145,7 +145,18 @@ export const pythonToMLSQL = (cell: vscode.NotebookCell): string => {
         code='''${header.body}''';
         ${cacheStr}
           `
-    }    
+    }
+    
+    if(cell.document.languageId === "yaml" && header.t === "visualize") {
+        const input = header.input || "command"
+        const output = header.output || uuid.v4().replace(/-/g, "")
+
+        return `
+        !visualize ${input} '''
+        ${header.body}
+        ''';
+        `
+    }
     return cell.document.getText()
 }
 

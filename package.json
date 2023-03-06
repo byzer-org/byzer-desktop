@@ -2,7 +2,7 @@
     "name": "mlsql",
     "displayName": "Byzer-lang",
     "description": "The Programming Language Designed For Big Data and AI",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "repository": {
         "url": "https://github.com/allewfantasy/mlsql-lang-vscode-plugin"
     },

@@ -4,7 +4,7 @@ import { filterPythonError, MLSQLExecuteResponse, ToContent } from '../common/da
 import { codeManager } from './code-manager';
 import * as uuid from 'uuid';
 import { uiProxy } from './ui-proxy';
-import { pythonToMLSQL } from '../common/hint-manager'
+import { rewriteSQL } from '../common/hint-manager'
 
 interface RawCellOutput {
     mime: string;
@@ -28,7 +28,7 @@ export class MLSQLNotebookController implements vscode.Disposable {
     readonly controllerId = 'mlsql-notebook-controller';
     readonly notebookType = 'mlsql-notebook';
     readonly label = 'MLSQL Notebook';
-    readonly supportedLanguages = ['python', 'markdown', 'mlsql'];
+    readonly supportedLanguages = ['python', 'markdown', 'mlsql','yaml'];
 
     private runningCells = new Map<RunningCell, boolean>()
 
@@ -81,7 +81,7 @@ export class MLSQLNotebookController implements vscode.Disposable {
             cell: cell,
             jobName: jobName
         }
-        const code = pythonToMLSQL(cell)
+        const code = rewriteSQL(cell)
         this.runningCells.set(runningKey, true)
         try {
             let res = await codeManager.runRawCode(code, jobName)
