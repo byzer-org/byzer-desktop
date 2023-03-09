@@ -33,7 +33,7 @@ export function readConfig(): { [key: string]: string; } {
   const configStr = fs.readFileSync(configFilePath).toString()
   const config: { [key: string]: string; } = {}
   configStr.split("\n").filter(line => line.trim() !== "").filter(line => !line.trim().startsWith("#")).forEach(line => {
-    const [key, value] = line.split("=", 2)
+    const [key, value] = line.split(/=(.+)/, 2)
     config[key.trim()] = value.trim()
   })
   return config
