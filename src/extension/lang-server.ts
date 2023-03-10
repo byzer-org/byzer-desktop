@@ -82,7 +82,7 @@ Try to:
         }
 
         const args: string[] = ["-cp",
-            `${path.join(MLSQL_LANG_DIR, "spark", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "main", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "conf", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "libs", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "plugin", "*")}`]
+            `${path.join(MLSQL_LANG_DIR, "main", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "conf", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "libs", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "plugin", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "spark", "*")}`]
 
         if (xmx) {
             args.unshift(xmx)
