@@ -63,7 +63,7 @@ Try to:
             xmx = `-Xmx${mlsqlConfig["engine.memory"]}`
         }
 
-        let MLSQL_LANG_DIR = MLSQL_LANG_HOME
+        let MLSQL_LANG_DIR = MLSQL_LANG_HOME || ""
 
         if ("engine.home" in mlsqlConfig) {
             uiProxy.println(`Using mlsql lang from engine.home in .mlsql.config :${mlsqlConfig["engine.home"]}`)
@@ -81,8 +81,11 @@ Try to:
             classPathSpliter = ";"
         }
 
-        const args: string[] = ["-cp",
-            `${path.join(MLSQL_LANG_DIR, "main", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "conf", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "libs", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "plugin", "*")}${classPathSpliter}${path.join(MLSQL_LANG_DIR, "spark", "*")}`]
+        // join main,conf,libs,plugin,spark path
+        const dirs = ["main", "conf", "libs", "plugin", "spark"] 
+        const classPath = dirs.map(dir => path.join(MLSQL_LANG_DIR, dir, "*")).join(classPathSpliter)
+        
+        const args: string[] = ["-cp",classPath]
 
         if (xmx) {
             args.unshift(xmx)
